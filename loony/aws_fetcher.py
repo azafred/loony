@@ -40,9 +40,22 @@ def aws_inventory():
                     subnet_id = inst.subnet_id
                 except:
                     subnet_id = 'No Subnet'
+                try:
+                    sc_app = inst.tags['sc_app']
+                except:
+                    sc_app = ''
+                try:
+                    sc_pillar = inst.tags['sc_pillar']
+                except:
+                    sc_pillar = ''
+                try:
+                    sc_version = inst.tags['sc_version']
+                except:
+                    sc_version = ''
                 monitored = inst.monitored
 
                 instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
                                  'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns, 'priv_dns': priv_dns,
-                                 'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored})
+                                 'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored,
+                                 'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version})
     return instance
