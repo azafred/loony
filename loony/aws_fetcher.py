@@ -1,7 +1,9 @@
 import boto.ec2
+import datetime
+from cache import scached
 
-## TODO: Implement caching.
 
+@scached(cache_file='/tmp/aws_inventory', expiry=datetime.timedelta(minutes=50))
 def aws_inventory():
     instance = []
     profiles = ['ops', 'qa', 'prod', 'experiments']
