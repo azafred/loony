@@ -1,5 +1,6 @@
-Sample Module Repository
-========================
+Loony
+=====
 
-This simple project is an example repo for Python projects.
+This script allows for querying AWS to find the right resources when you need them.
+
 
