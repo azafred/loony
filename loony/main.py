@@ -11,9 +11,9 @@ from cache import expire_cache
 from settings import *
 
 def connect():
-    main(connect=True)
+    main(connect=True, running_only=True)
 
-def main(connect=False):
+def main(connect=False, running_only=False):
 
     parser = argparse.ArgumentParser(description='Find stuff in AWS')
     parser.add_argument(
@@ -55,7 +55,7 @@ def main(connect=False):
     __builtin__.verbose = args.verbose
     __builtin__.debug = args.debug
     __builtin__.stopped = args.stopped
-    __builtin__.running = args.running
+    __builtin__.running = args.running or running_only
     __builtin__.short = args.short
     if args.output:
         output = args.output.split(',')
