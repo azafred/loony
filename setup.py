@@ -9,7 +9,7 @@ with open('LICENSE') as f:
 
 setup(
     name='loony',
-    version='0.1.6',
+    version='0.1.7',
     description='Sample package for Python-Guide.org',
     long_description=readme,
     author='Fred Vassard',
