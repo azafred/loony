@@ -5,6 +5,7 @@ import sys
 
 
 def connect_to(instances):
+    print "choices of %s instances" % len(instances)
     if len(instances) < 2:
         print("Note: make sure you are connected to the VPN!")
         ip = instances[0]['priv_ip']
