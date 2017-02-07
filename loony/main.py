@@ -2,7 +2,6 @@
 
 import argparse
 import logging
-import os
 import __builtin__
 from aws_fetcher import aws_inventory
 from display import display_results_ordered
@@ -12,12 +11,10 @@ from cache import expire_cache
 from settings import *
 
 def connect():
-    print "Hello Connect!"
     main(connect=True)
 
 def main(connect=False):
-    if connect:
-        print "Connect script called!"
+
     parser = argparse.ArgumentParser(description='Find stuff in AWS')
     parser.add_argument(
         '-v', '--verbose', action='store_true', default=False,
@@ -44,6 +41,12 @@ def main(connect=False):
         '--nocache', action='store_true', default=False,
         help='Force cache expiration', dest='nocache')
     parser.add_argument(
+        '--or', action='store_true', default=False,
+        help='Search item OR instead of combined', dest='oroperand')
+    parser.add_argument(
+        '-o', '--out', type=str, nargs='?',
+        help='Output format eg. id,name,pub_ip', dest='output')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -54,9 +57,15 @@ def main(connect=False):
     __builtin__.stopped = args.stopped
     __builtin__.running = args.running
     __builtin__.short = args.short
+    if args.output:
+        output = args.output.split(',')
+        __builtin__.output = output
+    else:
+        __builtin__.output = prefered_output
     search = args.search
     public = args.public
     nocache = args.nocache
+    oroperand = args.oroperand
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     if args.debug:
@@ -68,7 +77,7 @@ def main(connect=False):
         display_results_ordered(instances)
     elif search:
         print "Searching for %s" % search
-        results = searchfor(search)
+        results = searchfor(search, oroperand)
         if connect:
             connect_to(results)
     elif public:
