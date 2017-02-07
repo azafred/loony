@@ -8,6 +8,8 @@ from aws_fetcher import aws_inventory
 from display import display_results_ordered
 from search import searchfor, pub_ip
 from connect import connect_to
+from cache import expire_cache
+from settings import *
 
 def connect():
     print "Hello Connect!"
@@ -39,6 +41,9 @@ def main(connect=False):
         '--short', action='store_true', default=False,
         help='Display short-format results', dest='short')
     parser.add_argument(
+        '--nocache', action='store_true', default=False,
+        help='Force cache expiration', dest='nocache')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -51,10 +56,13 @@ def main(connect=False):
     __builtin__.short = args.short
     search = args.search
     public = args.public
+    nocache = args.nocache
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
+    if nocache:
+        expire_cache()
     if args.listall:
         instances = aws_inventory(create_index=True)
         display_results_ordered(instances)

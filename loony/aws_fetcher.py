@@ -2,13 +2,13 @@ import boto.ec2
 import datetime
 import __builtin__
 from cache import scached
+from settings import *
 
-
-@scached(cache_file='/tmp/aws_inventory', expiry=datetime.timedelta(minutes=50))
+@scached(cache_file=cache_file, expiry=datetime.timedelta(minutes=50))
 def aws_inventory(create_index=False):
     instance = []
     index = 1
-    profiles = ['ops', 'qa', 'prod', 'experiments']
+    profiles = default_aws_domains
     for p in profiles:
         conn=boto.connect_ec2(profile_name=p)
         reservations = conn.get_all_instances()

@@ -1,6 +1,8 @@
 import datetime
 import decorator
 import shelve
+import os
+from settings import *
 from hashlib import md5
 
 def scached(cache_file, expiry):
@@ -28,3 +30,11 @@ def scached(cache_file, expiry):
         return result
 
     return decorator.decorator(scached_closure)
+
+def expire_cache(cache_file=cache_file):
+    try:
+        os.remove(cache_file)
+        print "Cache removed."
+    except:
+        print "Something happened and I was not able to remove the cache file."
+        print "Please remove %s manually" % cache_file

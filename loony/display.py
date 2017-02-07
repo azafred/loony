@@ -7,8 +7,10 @@ def display_results_ordered(results, colmn="all"):
     if colmn == 'all' and not __builtin__.short:
         columns = ['index', 'pillar', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
                    'status', 'monitored', 'sc_pillar', 'sc_app', 'sc_version']
-    if colmn == 'short' or __builtin__.short:
+    elif colmn == 'short' or __builtin__.short:
         columns = ['index', 'name', 'priv_ip', 'status']
+    else:
+        columns = colmn
     t = prettytable.PrettyTable([c.capitalize() for c in columns])
     t.align = 'l'
     for r in results:
