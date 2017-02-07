@@ -2,14 +2,20 @@
 
 import argparse
 import logging
+import os
 import __builtin__
 from aws_fetcher import aws_inventory
 from display import display_results_ordered
 from search import searchfor, pub_ip
+from connect import connect_to
 
+def connect():
+    print "Hello Connect!"
+    main(connect=True)
 
-def main():
-
+def main(connect=False):
+    if connect:
+        print "Connect script called!"
     parser = argparse.ArgumentParser(description='Find stuff in AWS')
     parser.add_argument(
         '-v', '--verbose', action='store_true', default=False,
@@ -50,15 +56,17 @@ def main():
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
     if args.listall:
-        instances = aws_inventory()
+        instances = aws_inventory(create_index=True)
         display_results_ordered(instances)
     elif search:
         print "Searching for %s" % search
-        searchfor(search)
+        results = searchfor(search)
+        if connect:
+            connect_to(results)
     elif public:
         pub_ip()
     else:
-        instances = aws_inventory()
+        instances = aws_inventory(create_index=True)
         display_results_ordered(instances)
 
 if __name__ == '__main__':

@@ -27,5 +27,5 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.5.2
 wcwidth==0.1.7
-decorator
-colorama
+decorator==4.0.11
+colorama==0.3.7

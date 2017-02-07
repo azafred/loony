@@ -5,8 +5,9 @@ from cache import scached
 
 
 @scached(cache_file='/tmp/aws_inventory', expiry=datetime.timedelta(minutes=50))
-def aws_inventory():
+def aws_inventory(create_index=False):
     instance = []
+    index = 1
     profiles = ['ops', 'qa', 'prod', 'experiments']
     for p in profiles:
         conn=boto.connect_ec2(profile_name=p)
@@ -54,9 +55,17 @@ def aws_inventory():
                 except:
                     sc_version = ''
                 monitored = inst.monitored
-
-                instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
-                                 'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns, 'priv_dns': priv_dns,
-                                 'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored,
-                                 'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version})
+                if create_index:
+                    instance.append({'index': index, 'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
+                                     'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
+                                     'priv_dns': priv_dns,
+                                     'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
+                                     'monitored': monitored,
+                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version': sc_version})
+                    index += 1
+                else:
+                    instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
+                                     'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns, 'priv_dns': priv_dns,
+                                     'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored,
+                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version})
     return instance
