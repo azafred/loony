@@ -15,6 +15,10 @@ def searchfor(items, oroperand=False):
         result_per_item[item] = []
     for inst in aws:
         for item in items:
+            if inst['status'] == 'stopped' and __builtin__.running:
+                break
+            if inst['status'] == 'running' and __builtin__.stopped:
+                break
             if item in inst.values() or item in inst['name']:
                 try:
                     counter[inst['id']] += 1
