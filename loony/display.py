@@ -1,7 +1,10 @@
 import prettytable
 import __builtin__
 from colorama import Fore, Style
-from collections import OrderedDict
+
+def test(blah=''):
+    blah = __builtin__.output
+    print blah
 
 def display_results_ordered(results, colmn="all"):
     if 'all' not in __builtin__.output:
@@ -11,6 +14,8 @@ def display_results_ordered(results, colmn="all"):
                    'status', 'monitored', 'sc_pillar', 'sc_app', 'sc_version']
     elif colmn == 'short' or __builtin__.short:
         columns = ['index', 'name', 'priv_ip', 'status']
+    elif colmn == 'normal':
+        columns = ['index', 'name', 'id', 'priv_ip', 'size', 'sc_app', 'sc_version']
     t = prettytable.PrettyTable([c.capitalize() for c in columns])
     t.align = 'l'
     for r in results:

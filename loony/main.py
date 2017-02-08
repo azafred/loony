@@ -6,7 +6,7 @@ import logging
 import __builtin__
 import sys
 from aws_fetcher import aws_inventory
-from display import display_results_ordered
+from display import display_results_ordered, test
 from search import searchfor, pub_ip
 from connect import connect_to
 from cache import expire_cache
@@ -50,6 +50,9 @@ def main(connect=False, running_only=False):
         '--version', action='store_true', default=False,
         help="Print version", dest='version')
     parser.add_argument(
+        '--test', action='store_true', default=False,
+        help="test", dest='testnstuff')
+    parser.add_argument(
         '-o', '--out', type=str, nargs='?',
         help='Output format eg. id,name,pub_ip', dest='output')
     parser.add_argument(
@@ -73,6 +76,8 @@ def main(connect=False, running_only=False):
     nocache = args.nocache
     oroperand = args.oroperand
     version = args.version
+    if args.testnstuff:
+        test()
     if version:
         show_version()
         sys.exit(0)
