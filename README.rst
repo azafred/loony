@@ -21,3 +21,51 @@ cd loony
 python setup.py install
 
 
+SETUP
+=====
+In order to work ~/.aws/credentials needs to be setup. This is the same file that aws-cli and boto use. It should look
+similar to this:
+
+[default]
+region = us-east-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+[fred]
+region = us-west-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+[prod]
+region = us-east-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+[qa]
+region = us-east-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+[ops]
+region = us-east-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+
+[experiments]
+region = us-east-1
+aws_access_key_id = blahblah
+aws_secret_access_key = blahblah
+output = text
+
+I usually set [default] like [prod]
+
+Next, edit setting.py (depending on how you installed the script, the location will vary)
+If you install it from pip without virtualenv, it will be in /Library/Python/2.7/site-packages/loony/settings.py
+Based on your credentials, you might want to adjust the default_aws_domains variable.
+
