@@ -7,9 +7,11 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
+exec(open('loony/version.py').read())
+
 setup(
     name='loony',
-    version='0.2.3',
+    version=__version__,
     description='Sample package for Python-Guide.org',
     long_description=readme,
     author='Fred Vassard',

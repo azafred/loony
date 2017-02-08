@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 
+
 import argparse
 import logging
 import __builtin__
+import sys
 from aws_fetcher import aws_inventory
 from display import display_results_ordered
 from search import searchfor, pub_ip
 from connect import connect_to
 from cache import expire_cache
 from settings import *
+from version import __version__
 
 def connect():
     main(connect=True, running_only=True)
@@ -44,6 +47,9 @@ def main(connect=False, running_only=False):
         '--or', action='store_true', default=False,
         help='Search item OR instead of combined', dest='oroperand')
     parser.add_argument(
+        '--version', action='store_true', default=False,
+        help="Print version", dest='version')
+    parser.add_argument(
         '-o', '--out', type=str, nargs='?',
         help='Output format eg. id,name,pub_ip', dest='output')
     parser.add_argument(
@@ -66,6 +72,10 @@ def main(connect=False, running_only=False):
     public = args.public
     nocache = args.nocache
     oroperand = args.oroperand
+    version = args.version
+    if version:
+        show_version()
+        sys.exit(0)
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     if args.debug:
@@ -85,6 +95,10 @@ def main(connect=False, running_only=False):
     else:
         instances = aws_inventory(create_index=True)
         display_results_ordered(instances)
+
+def show_version():
+    print "Loony version %s " % __version__
+
 
 if __name__ == '__main__':
     main()
