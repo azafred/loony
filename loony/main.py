@@ -41,6 +41,9 @@ def main(connect=False, running_only=False):
         '--short', action='store_true', default=False,
         help='Display short-format results', dest='short')
     parser.add_argument(
+        '--long', action='store_true', default=False,
+        help='Display long-format results', dest='long')
+    parser.add_argument(
         '--nocache', action='store_true', default=False,
         help='Force cache expiration', dest='nocache')
     parser.add_argument(
@@ -66,6 +69,7 @@ def main(connect=False, running_only=False):
     __builtin__.stopped = args.stopped
     __builtin__.running = args.running or running_only
     __builtin__.short = args.short
+    __builtin__.long = args.long
     if args.output:
         output = args.output.split(',')
         __builtin__.output = output
