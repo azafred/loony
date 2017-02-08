@@ -4,7 +4,7 @@ import __builtin__
 from cache import scached
 from settings import *
 
-@scached(cache_file=cache_file, expiry=datetime.timedelta(minutes=50))
+@scached(cache_file=cache_file, expiry=datetime.timedelta(minutes=cache_lifetime))
 def aws_inventory(create_index=False):
     instance = []
     index = 1
