@@ -58,14 +58,10 @@ The output can also be customized:
 INSTALL
 =======
 Installing those scripts is a pip command away!
-Sadly, Bitbucket SSL is somehow troubling to BitBucket...
-Anyway, this command will do the trick:
+This command will do the trick:
 
-sudo pip install https://github.com/azafred/loony/archive/master.zip
+sudo pip install git+ssh://git@bitbucket.sparkcentral.ninja:7999/int/loony.git
 
-or
-
-sudo pip install  https://bitbucket.sparkcentral.ninja:7999/int/loony.git/archive/master.zip
 
 (don't use sudo if you are in a virtualenv, but the script will then only be available when in that virtualenv...)
 
