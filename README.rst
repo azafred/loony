@@ -12,6 +12,11 @@ Sadly, Bitbucket SSL is somehow troubling to BitBucket...
 Anyway, this command will do the trick:
 
 sudo pip install https://github.com/azafred/loony/archive/master.zip
+
+or
+
+sudo pip install  https://bitbucket.sparkcentral.ninja:7999/int/loony.git/archive/master.zip
+
 (don't use sudo if you are in a virtualenv, but the script will then only be available when in that virtualenv...)
 
 One could also clone the repo and run
@@ -70,5 +75,14 @@ I usually set [default] like [prod]
 
 Next, edit setting.py (depending on how you installed the script, the location will vary)
 If you install it from pip without virtualenv, it will be in /Library/Python/2.7/site-packages/loony/settings.py
+
 Based on your credentials, you might want to adjust the default_aws_domains variable.
 
+USAGE
+=====
+
+The installer will setup two scripts:
+
+- loony  => used for searching for things
+
+- connect => used to connect to things
