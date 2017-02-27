@@ -17,7 +17,7 @@ def scached(cache_file, expiry):
 
         # Get new data if we have to
         if key not in d:
-            print "Cache expired. Please wait while I retrieve fresh values... "
+            print "Please wait while I rebuild the cache... "
             data = func(*args, **kw)
             d[key] = {
                 'expires_on' : datetime.datetime.now() + expiry,

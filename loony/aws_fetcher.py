@@ -20,7 +20,7 @@ def aws_inventory(create_index=False):
                 except:
                     name = 'NoName'
                 location = inst.placement
-                launch_time = inst.launch_time
+                launch_time = str(inst.launch_time)
                 size = inst.instance_type
                 try:
                     public_ip = inst.ip_address
