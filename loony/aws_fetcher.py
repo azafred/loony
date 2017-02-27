@@ -20,6 +20,7 @@ def aws_inventory(create_index=False):
                 except:
                     name = 'NoName'
                 location = inst.placement
+                launch_time = inst.launch_time
                 size = inst.instance_type
                 try:
                     public_ip = inst.ip_address
@@ -61,11 +62,11 @@ def aws_inventory(create_index=False):
                                      'priv_dns': priv_dns,
                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
                                      'monitored': monitored,
-                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version': sc_version})
+                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version': sc_version, 'launch_time': launch_time})
                     index += 1
                 else:
                     instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
                                      'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns, 'priv_dns': priv_dns,
                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored,
-                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version})
+                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version, 'launch_time': launch_time})
     return instance
