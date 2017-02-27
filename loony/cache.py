@@ -33,6 +33,7 @@ def scached(cache_file, expiry):
 
 def expire_cache(cache_file=cache_file):
     try:
+        cache_file = cache_file + ".db"
         os.remove(cache_file)
         print "Cache removed."
     except:
