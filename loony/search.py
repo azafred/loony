@@ -19,8 +19,16 @@ def searchfor(items, oroperand=False):
                 break
             if inst['status'] == 'running' and __builtin__.stopped:
                 break
+            if item in inst['name']:
+                try:
+                    counter[inst['id']] += 1
+                except:
+                    counter[inst['id']] = 1
+                if inst not in or_result:
+                    or_result.append(inst)
+                result_per_item[item].append(inst)
             for k,v in inst.items():
-                if item in str(v) or item in inst['name']:
+                if item in str(v):
                     try:
                         counter[inst['id']] += 1
                     except KeyError:
