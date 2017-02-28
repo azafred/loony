@@ -16,7 +16,7 @@ from version import __version__
 def connect():
     main(connect=True, running_only=True)
 
-def main(connect=False, running_only=False):
+def main(connect=False, running_only=True):
 
     parser = argparse.ArgumentParser(description='Find stuff in AWS')
     parser.add_argument(
