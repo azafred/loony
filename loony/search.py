@@ -27,15 +27,16 @@ def searchfor(items, oroperand=False):
                 if inst not in or_result:
                     or_result.append(inst)
                 result_per_item[item].append(inst)
-            for k,v in inst.items():
-                if item in str(v):
-                    try:
-                        counter[inst['id']] += 1
-                    except KeyError:
-                        counter[inst['id']] = 1
-                    if inst not in or_result:
-                        or_result.append(inst)
-                    result_per_item[item].append(inst)
+            else:
+                for k,v in inst.items():
+                    if item in str(v):
+                        try:
+                            counter[inst['id']] += 1
+                        except KeyError:
+                            counter[inst['id']] = 1
+                        if inst not in or_result:
+                            or_result.append(inst)
+                        result_per_item[item].append(inst)
     if not oroperand:
         for k,v in counter.iteritems():
             if v == len(items):
