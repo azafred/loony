@@ -28,7 +28,7 @@ def searchfor(items, oroperand=False):
                     or_result.append(inst)
                 result_per_item[item].append(inst)
             else:
-                for k,v in inst.items():
+                for k, v in inst.items():
                     if item in str(v):
                         try:
                             counter[inst['id']] += 1
@@ -38,7 +38,7 @@ def searchfor(items, oroperand=False):
                             or_result.append(inst)
                         result_per_item[item].append(inst)
     if not oroperand:
-        for k,v in counter.iteritems():
+        for k, v in counter.iteritems():
             if v == len(items):
                 for inst in aws:
                     if inst['id'] == k:
