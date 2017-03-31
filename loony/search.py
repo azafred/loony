@@ -30,6 +30,7 @@ def searchfor(items, oroperand=False):
             else:
                 for k, v in inst.items():
                     if item in str(v):
+                        print("%s => Matched on inst %s" % (v, inst['id']))
                         try:
                             counter[inst['id']] += 1
                         except KeyError:
@@ -47,6 +48,7 @@ def searchfor(items, oroperand=False):
             r['index'] = index
             index += 1
         if len(and_result) >= 1:
+            # print and_result
             display_results_ordered(and_result)
         return and_result
     else:
@@ -57,13 +59,4 @@ def searchfor(items, oroperand=False):
             display_results_ordered(or_result)
         return or_result
 
-def pub_ip():
-    aws = aws_inventory()
-    result = []
-    for inst in aws:
-        if inst['pub_ip']:
-            if inst not in result:
-                result.append(inst)
-    if len(result) >= 1:
-        display_results_ordered(result)
-    return result
+

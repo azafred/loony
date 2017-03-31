@@ -6,8 +6,8 @@ import logging
 import __builtin__
 import sys
 from aws_fetcher import aws_inventory
-from display import display_results_ordered, test
-from search import searchfor, pub_ip
+from display import display_results_ordered
+from search import searchfor
 from connect import connect_to
 from cache import expire_cache
 from settings import *
@@ -34,9 +34,6 @@ def main(connect=False, running_only=True):
     parser.add_argument(
         '-ro', '--running', action='store_true', default=False,
         help='Only display running instances', dest='running')
-    parser.add_argument(
-        '-pub', '--public', action='store_true', default=False,
-        help='Find those instances with public IPs', dest='public')
     parser.add_argument(
         '--short', action='store_true', default=False,
         help='Display short-format results', dest='short')
@@ -76,7 +73,6 @@ def main(connect=False, running_only=True):
     else:
         __builtin__.output = prefered_output
     search = args.search
-    public = args.public
     nocache = args.nocache
     oroperand = args.oroperand
     version = args.version
@@ -99,8 +95,7 @@ def main(connect=False, running_only=True):
         results = searchfor(search, oroperand)
         if connect:
             connect_to(results)
-    elif public:
-        pub_ip()
+
     else:
         instances = aws_inventory(create_index=True)
         display_results_ordered(instances)
