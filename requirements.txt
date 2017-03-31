@@ -29,3 +29,4 @@ Sphinx==1.5.2
 wcwidth==0.1.7
 decorator==4.0.11
 colorama==0.3.7
+libtmux==0.6.4
