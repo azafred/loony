@@ -43,30 +43,19 @@ def aws_inventory(create_index=False):
                     subnet_id = inst.subnet_id
                 except:
                     subnet_id = 'No Subnet'
-                try:
-                    sc_app = inst.tags['sc_app']
-                except:
-                    sc_app = ''
-                try:
-                    sc_pillar = inst.tags['sc_pillar']
-                except:
-                    sc_pillar = ''
-                try:
-                    sc_version = inst.tags['sc_version']
-                except:
-                    sc_version = ''
+                tags = inst.tags
                 monitored = inst.monitored
                 if create_index:
                     instance.append({'index': index, 'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
                                      'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
                                      'priv_dns': priv_dns,
                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                     'monitored': monitored,
-                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version': sc_version, 'launch_time': launch_time})
+                                     'monitored': monitored, 'tags': tags,
+                                     'launch_time': launch_time})
                     index += 1
                 else:
-                    instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size,
+                    instance.append({'pillar': p, 'id': id, 'name': name, 'location': location, 'size': size, 'tags': tags,
                                      'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns, 'priv_dns': priv_dns,
                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id, 'monitored': monitored,
-                                     'sc_app': sc_app, 'sc_pillar': sc_pillar, 'sc_version':sc_version, 'launch_time': launch_time})
+                                     'launch_time': launch_time})
     return instance

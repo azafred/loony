@@ -11,10 +11,10 @@ def display_results_ordered(results):
     if __builtin__.short:
         display_columns = ['index', 'name', 'priv_ip', 'status']
     elif __builtin__.long:
-        display_columns = ['index', 'pillar', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
-                   'status', 'monitored', 'sc_pillar', 'sc_app', 'sc_version', 'launch_time']
+        display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
+                   'status', 'monitored', 'launch_time']
     elif not __builtin__.output or __builtin__.output == 'normal':
-        display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'sc_app', 'sc_version', 'launch_time']
+        display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'launch_time']
     else:
         display_columns = __builtin__.output
 
