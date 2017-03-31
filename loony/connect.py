@@ -40,7 +40,7 @@ def init_tmux(instances, title='loony', cmd='', user='ec2_user'):
     # some logic and if loops here....
     w = session.new_window(attach=False, window_name="blah")
     for inst in instances:
-        p1 = w.split_window(attach=False, window_name=inst['Name'])
+        p1 = w.split_window(attach=False, window_name=inst['name'])
         p1.send_keys("ssh -l " + user + " " + inst['ip'])
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()
