@@ -67,3 +67,9 @@ def aws_inventory(create_index=False):
                                      'monitored'     : monitored,
                                      'launch_time'   : launch_time, 'tags_txt': tags_txt})
     return instances
+
+def list_keys():
+    instances = aws_inventory()
+    keys = sorted(instances[0].keys())
+    print "The following keys are available:"
+    print ", ".join(keys)

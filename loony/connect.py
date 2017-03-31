@@ -4,13 +4,13 @@ from settings import *
 import sys
 
 
-def connect_to(instances):
+def connect_to(instances, user='ec2-user'):
     print "choices of %s instances" % len(instances)
     if len(instances) < 2:
         print("Note: make sure you are connected to the VPN!")
         ip = instances[0]['priv_ip']
         print("Connecting to %s" % ip)
-        call("ssh -l " + ssh_as + " " + ip, shell=True)
+        call("ssh -l " + user + " " + ip, shell=True)
         sys.exit(0)
     else:
         dest = raw_input("Connect to instance number: (0 to quit) ")
@@ -23,6 +23,6 @@ def connect_to(instances):
                 ip = inst['priv_ip']
                 print("Note: make sure you are connected to the VPN!")
                 print("connecting to: %s " % ip)
-                call("ssh -l " + ssh_as + " " + ip, shell=True)
+                call("ssh -l " + user + " " + ip, shell=True)
                 sys.exit(0)
     print("An error has occured.")

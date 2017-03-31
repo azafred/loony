@@ -5,7 +5,7 @@ import argparse
 import logging
 import __builtin__
 import sys
-from aws_fetcher import aws_inventory
+from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
 from search import searchfor
 from connect import connect_to
@@ -25,7 +25,6 @@ def main(connect=False, running_only=True):
     parser.add_argument(
         '-d', '--debug', action='store_true', default=False,
         help='Debug level verbosity', dest='debug')
-
     parser.add_argument(
         '--short', action='store_true', default=False,
         help='Display short-format results', dest='short')
@@ -36,11 +35,17 @@ def main(connect=False, running_only=True):
         '--nocache', action='store_true', default=False,
         help='Force cache expiration', dest='nocache')
     parser.add_argument(
+        '-k', '--keys', action='store_true', default=False,
+        help="List all the keys for indexing or output", dest='listkeys')
+    parser.add_argument(
         '--version', action='store_true', default=False,
         help="Print version", dest='version')
     parser.add_argument(
         '-o', '--out', type=str, nargs='?',
         help='Output format eg. id,name,pub_ip', dest='output')
+    parser.add_argument(
+        '-u', '--user', type=str, nargs='?',
+        help='When connecting, what user to ssh in as', dest='user')
     parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
@@ -61,6 +66,8 @@ def main(connect=False, running_only=True):
     search = args.search
     nocache = args.nocache
     version = args.version
+    listkeys = args.listkeys
+    user = args.user
     if version:
         show_version()
         sys.exit(0)
@@ -70,11 +77,16 @@ def main(connect=False, running_only=True):
         logging.basicConfig(level=logging.DEBUG)
     if nocache:
         expire_cache()
-    if search:
+    if listkeys:
+        list_keys()
+    elif search:
         print "Searching for %s" % search
         results = searchfor(search)
         if connect:
-            connect_to(results)
+            if user:
+                connect_to(results, user)
+            else:
+                connect_to(results)
 
     else:
         instances = aws_inventory(create_index=True)
