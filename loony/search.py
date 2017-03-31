@@ -1,62 +1,54 @@
 import __builtin__
 from aws_fetcher import aws_inventory
 from display import display_results_ordered
+from pprint import pprint
 
-def searchfor(items, oroperand=False):
-    if __builtin__.verbose:
-        print 'verbose'
+def searchfor(items):
     aws = aws_inventory()
-    or_result = []
-    result_per_item = {}
-    and_result = []
-    counter = {}
+    results_per_item = {}
+    result_counter = {}
+    result = []
     index = 1
     for item in items:
-        result_per_item[item] = []
+        results_per_item[item] = []
     for inst in aws:
         for item in items:
-            if inst['status'] == 'stopped' and __builtin__.running:
-                break
-            if inst['status'] == 'running' and __builtin__.stopped:
-                break
-            if item in inst['name']:
-                try:
-                    counter[inst['id']] += 1
-                except:
-                    counter[inst['id']] = 1
-                if inst not in or_result:
-                    or_result.append(inst)
-                result_per_item[item].append(inst)
+            if '=' in item:
+                key, value = item.split('=')
+                # This is a filtered search
+                if inst[key] == value:
+                    if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                        pass
+                    else:
+                        results_per_item[item].append(inst)
+                        try:
+                            result_counter[inst['id']] += 1
+                        except:
+                            result_counter[inst['id']] = 1
+                            
             else:
+                # This is a everything search
                 for k, v in inst.items():
                     if item in str(v):
-                        print("%s => Matched on inst %s" % (v, inst['id']))
-                        try:
-                            counter[inst['id']] += 1
-                        except KeyError:
-                            counter[inst['id']] = 1
-                        if inst not in or_result:
-                            or_result.append(inst)
-                        result_per_item[item].append(inst)
-    if not oroperand:
-        for k, v in counter.iteritems():
-            if v == len(items):
-                for inst in aws:
-                    if inst['id'] == k:
-                        and_result.append(inst)
-        for r in and_result:
-            r['index'] = index
-            index += 1
-        if len(and_result) >= 1:
-            # print and_result
-            display_results_ordered(and_result)
-        return and_result
-    else:
-        for r in or_result:
-            r['index'] = index
-            index += 1
-        if len(or_result) >= 1:
-            display_results_ordered(or_result)
-        return or_result
+                        # Only add instance if it is not already in the list...
+                        if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                            pass
+                        else:
+                            results_per_item[item].append(inst)
+                            try:
+                                result_counter[inst['id']] += 1
+                            except:
+                                result_counter[inst['id']] = 1
 
-
+    for k, v in result_counter.iteritems():
+        if v == len(items):
+            for inst in aws:
+                if inst['id'] == k:
+                    result.append(inst)
+    for r in result:
+        r['index'] = index
+        index += 1
+    if len(result) >= 1:
+        # print and_result
+        display_results_ordered(result)
+    return result

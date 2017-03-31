@@ -7,7 +7,7 @@ def display_results_ordered(results):
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif __builtin__.long:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
-                   'status', 'monitored', 'launch_time', 'Env', 'Role', 'Master', 'cfn_stack_name']
+                   'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name']
     elif not __builtin__.output or __builtin__.output == 'normal':
         display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'launch_time', 'tags_txt']
     else:
