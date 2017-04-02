@@ -8,6 +8,8 @@ import libtmux
 def connect_to(instances, user=''):
     if user:
         cmd_usr = ' -l %s ' % user
+    else:
+        cmd_usr = ' '
     print "choices of %s instances" % len(instances)
     if len(instances) < 2:
         print("Note: make sure you are connected to the VPN!")
@@ -39,6 +41,8 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     pindex = 0
     if user:
         cmd_usr = ' -l %s ' % user
+    else:
+        cmd_usr =' '
     server = libtmux.Server()
     session = server.new_session(title)
     num_of_panes = len(instances)
