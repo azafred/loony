@@ -5,13 +5,15 @@ import sys
 import libtmux
 
 
-def connect_to(instances, user='ec2-user'):
+def connect_to(instances, user=''):
+    if user:
+        cmd_usr = ' -l %s ' % user
     print "choices of %s instances" % len(instances)
     if len(instances) < 2:
         print("Note: make sure you are connected to the VPN!")
         ip = instances[0]['priv_ip']
         print("Connecting to %s" % ip)
-        call("ssh -l " + user + " " + ip, shell=True)
+        call("ssh" + cmd_usr + ip, shell=True)
         sys.exit(0)
     elif len(instances) <= 10:
         # use tmux!
@@ -28,12 +30,14 @@ def connect_to(instances, user='ec2-user'):
                 ip = inst['priv_ip']
                 print("Note: make sure you are connected to the VPN!")
                 print("connecting to: %s " % ip)
-                call("ssh -l " + user + " " + ip, shell=True)
+                call("ssh" + cmd_usr + ip, shell=True)
                 sys.exit(0)
     print("An error has occured.")
 
 
-def init_tmux(instances, title='loony', cmd='', user='ec2_user'):
+def init_tmux(instances, title='loony', cmd='', user=''):
+    if user:
+        cmd_usr = ' -l %s ' % user
     server = libtmux.Server()
     session = server.new_session(title)
     num_of_panes = len(instances)
@@ -41,6 +45,6 @@ def init_tmux(instances, title='loony', cmd='', user='ec2_user'):
     w = session.new_window(attach=False, window_name="blah")
     for inst in instances:
         p1 = w.split_window(attach=False)
-        p1.send_keys("ssh -l " + user + " " + inst['priv_ip'])
+        p1.send_keys("ssh" + cmd_usr + inst['priv_ip'])
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()
