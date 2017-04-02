@@ -15,7 +15,7 @@ def connect_to(instances, user=''):
         print("Connecting to %s" % ip)
         call("ssh" + cmd_usr + ip, shell=True)
         sys.exit(0)
-    elif len(instances) <= 10:
+    elif len(instances) <= 18:
         # use tmux!
         init_tmux(instances, user=user)
         pass
@@ -36,15 +36,22 @@ def connect_to(instances, user=''):
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
+    pindex = 0
     if user:
         cmd_usr = ' -l %s ' % user
     server = libtmux.Server()
     session = server.new_session(title)
     num_of_panes = len(instances)
     # some logic and if loops here....
-    w = session.new_window(attach=False, window_name="blah")
+    w = session.new_window(attach=False, window_name=title)
     for inst in instances:
-        p1 = w.split_window(attach=False)
-        p1.send_keys("ssh" + cmd_usr + inst['priv_ip'])
+        if pindex % 6 == 0 and pindex != 0:
+            w = session.new_window(attach=False, window_name=title)
+        if pindex % 2 == 0:
+            p[inst] = w.split_window(attach=False)
+        else:
+            p[inst] = w.split_window(attache=False, vertical=False)
+        p[inst].send_keys("ssh" + cmd_usr + inst['priv_ip'])
+        pindex += 1
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()
