@@ -36,7 +36,6 @@ def connect_to(instances, user=''):
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
-    p=[]
     pindex = 0
     if user:
         cmd_usr = ' -l %s ' % user
@@ -49,10 +48,10 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         if pindex % 6 == 0 and pindex != 0:
             w = session.new_window(attach=False, window_name=title)
         if pindex % 2 == 0:
-            p[pindex] = w.split_window(attach=False)
+            p = w.split_window(attach=False)
         else:
-            p[inst] = w.split_window(attache=False, vertical=False)
-        p[pindex].send_keys("ssh" + cmd_usr + inst['priv_ip'])
+            p = w.split_window(attache=False, vertical=False)
+        p.send_keys("ssh" + cmd_usr + inst['priv_ip'])
         pindex += 1
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()
