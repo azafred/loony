@@ -52,9 +52,9 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         if pindex % 6 == 0 and pindex != 0:
             w = session.new_window(attach=False, window_name=title)
         if pindex % 2 == 0:
-            p = w.split_window(attach=False)
-        else:
             p = w.split_window(attach=False, vertical=False)
+        else:
+            p = w.split_window(attach=False, vertical=True)
         p.send_keys("ssh" + cmd_usr + inst['priv_ip'])
         pindex += 1
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
