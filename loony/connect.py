@@ -36,6 +36,7 @@ def connect_to(instances, user=''):
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
+    p={}
     pindex = 0
     if user:
         cmd_usr = ' -l %s ' % user
