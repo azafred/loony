@@ -49,9 +49,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     # some logic and if loops here....
     w = session.new_window(attach=True, window_name=title)
     for inst in instances:
-        print pindex    
         if pindex % 4 == 0 and pindex != 0:
-            print "new window"
             blah = title + str(pindex)
             w = session.new_window(attach=True, window_name=blah)
         p = w.split_window(attach=True, vertical=True)
