@@ -7,7 +7,6 @@ This script allows for querying AWS to find the right resources when you need th
 USAGE:
 ======
 In its simplest form, loony will simply return all the hosts running in AWS:
-
 ::
     #> loony
     Please wait while I rebuild the cache...
@@ -65,7 +64,6 @@ You can also search by keys for a more refined output:
 
 You get the idea....
 now how about the output? Well, fear not, it is customizable. There are a few builtins: --short and --long:
-
 ::
     #> loony --short cfn_stack_name=mongo-prod-m12-s04
     Searching for ['cfn_stack_name=mongo-prod-m12-s04']
@@ -84,7 +82,6 @@ now how about the output? Well, fear not, it is customizable. There are a few bu
     +-------+--------------------------------+---------------------+---------------+--------+--------------+-----------------+-----------+------------+---------+-----------+--------------------------+------------+--------+--------+--------------------+
 
 You can of course also customize the output, using the same keys listed above:
-
 ::
     #> loony -o name,priv_ip cfn_stack_name=mongo-prod-m12-s04
     Searching for ['cfn_stack_name=mongo-prod-m12-s04']
@@ -95,7 +92,6 @@ You can of course also customize the output, using the same keys listed above:
     +--------------------------------+---------------+
 
 Finally, you can also combine things together:
-
 ::
     #> loony mongo size=t2.small env=production
     Searching for ['mongo', 'size=t2.small', 'env=production']
@@ -117,7 +113,6 @@ If there are more than 1 results, it will use tmux to connect to all the results
 depending on the number of servers to connect to.
 
 To access this wonderful featuer, simply add -c to your loony command, or use the connect alias:
-
 ::
     #> onnect jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com
     Searching for ['jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com']
@@ -137,8 +132,6 @@ To access this wonderful featuer, simply add -c to your loony command, or use th
 
     https://aws.amazon.com/amazon-linux-ami/2016.09-release-notes/
     [fred@jobserver-i-0b4b509cd8e988144 ~]$
-
-
 ::
     #> loony -c jobserver env=production
     fatal: No names found, cannot describe anything.
@@ -154,7 +147,9 @@ To access this wonderful featuer, simply add -c to your loony command, or use th
     | 6     | jobserver-i-080d1ed6835388eb0.prod.ec2.studyblue.com | i-080d1ed6835388eb0 | 172.16.61.240 | m4.large | 2017-03-31T20:58:35.000Z | Role='jobserver', Env='production' |
     +-------+------------------------------------------------------+---------------------+---------------+----------+--------------------------+------------------------------------+
     choices of 6 instances
-    .. image:: https://www.dropbox.com/s/vfb2mf11m0qbesc/Screenshot%202017-04-03%2010.53.03.png?dl=0
+
+
+.. image:: https://www.dropbox.com/s/vfb2mf11m0qbesc/Screenshot%202017-04-03%2010.53.03.png?dl=0
 
 
 INSTALL
