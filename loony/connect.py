@@ -48,7 +48,6 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     num_of_panes = len(instances)
     # some logic and if loops here....
     w = session.new_window(attach=False, window_name=title)
-    w.select_layout('tiled')
     for inst in instances:
         if pindex % 6 == 0 and pindex != 0:
             w = session.new_window(attach=False, window_name=title)
@@ -59,5 +58,6 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         p.select_pane()
         p.send_keys("ssh" + cmd_usr + inst['priv_ip'])
         pindex += 1
+    w.select_layout('tiled')
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()
