@@ -159,14 +159,14 @@ INSTALL
 Installing those scripts is a pip command away!
 This command will do the trick:
 
-sudo pip install git+ssh://git@github.com/azafred/loony.git
+sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
 
 
 (don't use sudo if you are in a virtualenv, but the script will then only be available when in that virtualenv...)
 
 One could also clone the repo and run
 
-git clone ssh://git@github.com/azafred/loony.git
+git clone ssh://git@github.com/StudyBlue/loony.git
 cd loony
 python setup.py install
 
