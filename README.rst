@@ -114,7 +114,7 @@ depending on the number of servers to connect to.
 
 To access this wonderful featuer, simply add -c to your loony command, or use the connect alias:
 ::
-    #> onnect jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com
+    #> connect jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com
     Searching for ['jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com']
     +-------+------------------------------------------------------+---------------------+---------------+----------+--------------------------+------------------------------------+
     | Index | Name                                                 | Id                  | Priv_ip       | Size     | Launch_time              | Tags_txt                           |
@@ -132,6 +132,8 @@ To access this wonderful featuer, simply add -c to your loony command, or use th
 
     https://aws.amazon.com/amazon-linux-ami/2016.09-release-notes/
     [fred@jobserver-i-0b4b509cd8e988144 ~]$
+
+And for more than one server:
 ::
     #> loony -c jobserver env=production
     fatal: No names found, cannot describe anything.
@@ -149,7 +151,7 @@ To access this wonderful featuer, simply add -c to your loony command, or use th
     choices of 6 instances
 
 
-.. image:: https://www.dropbox.com/s/vfb2mf11m0qbesc/Screenshot%202017-04-03%2010.53.03.png?dl=0
+.. image:: https://www.dropbox.com/s/vfb2mf11m0qbesc/Screenshot%202017-04-03%2010.53.03.png
 
 
 INSTALL
