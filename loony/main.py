@@ -50,7 +50,7 @@ def main(connect=False, running_only=True):
         '-c', '--connect', action='store_true',
         default=False,
         help="Connect to one or more instances",
-        dest='connect')
+        dest='connectcli')
     parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
@@ -72,7 +72,7 @@ def main(connect=False, running_only=True):
     nocache = args.nocache
     version = args.version
     listkeys = args.listkeys
-    connect = args.connect
+    connectcli = args.connectcli
     user = args.user
     if version:
         show_version()
@@ -88,7 +88,7 @@ def main(connect=False, running_only=True):
     elif search:
         print "Searching for %s" % search
         results = searchfor(search)
-        if connect:
+        if connect or connectcli:
             if user:
                 connect_to(results, user)
             else:
