@@ -55,6 +55,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
             p = w.split_window(attach=False, vertical=False)
         else:
             p = w.split_window(attach=False, vertical=True)
+        p.select_pane()
         p.send_keys("ssh" + cmd_usr + inst['priv_ip'])
         pindex += 1
     # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
