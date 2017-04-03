@@ -47,6 +47,11 @@ def main(connect=False, running_only=True):
         '-u', '--user', type=str, nargs='?',
         help='When connecting, what user to ssh in as', dest='user')
     parser.add_argument(
+        '-c', '--connect', action='store_true',
+        default=False,
+        help="Connect to one or more instances",
+        dest='connect')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -67,6 +72,7 @@ def main(connect=False, running_only=True):
     nocache = args.nocache
     version = args.version
     listkeys = args.listkeys
+    connect = args.connect
     user = args.user
     if version:
         show_version()
