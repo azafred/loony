@@ -48,6 +48,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     num_of_panes = len(instances)
     # some logic and if loops here....
     w = session.new_window(attach=False, window_name=title)
+    w.select_layout('split-pane')
     for inst in instances:
         if pindex % 6 == 0 and pindex != 0:
             w = session.new_window(attach=False, window_name=title)
