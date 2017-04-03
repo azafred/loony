@@ -151,7 +151,7 @@ And for more than one server:
     choices of 6 instances
 
 
-.. image:: https://www.dropbox.com/s/vfb2mf11m0qbesc/Screenshot%202017-04-03%2010.53.03.png
+.. image:: tmux.png
 
 
 INSTALL
