@@ -18,9 +18,5 @@ def display_results_ordered(results):
     t.align = 'l'
     for r in results:
         # tags = str(r['tags'])
-        if r['status'] == 'stopped' and not __builtin__.running:
-            r['status'] = Fore.RED + 'stopped' + Style.RESET_ALL
-            t.add_row([r[x] for x in display_columns])
-        elif r['status'] == 'running' and not __builtin__.stopped:
-            t.add_row([r[x] for x in display_columns])
+        t.add_row([r[x] for x in display_columns])
     print(t)

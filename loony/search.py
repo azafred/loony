@@ -43,7 +43,7 @@ def searchfor(items):
     for k, v in result_counter.iteritems():
         if v == len(items):
             for inst in aws:
-                if inst['id'] == k:
+                if inst['id'] == k and 'running' in inst['status']:
                     result.append(inst)
     for r in result:
         r['index'] = index
