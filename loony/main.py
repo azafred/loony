@@ -57,6 +57,11 @@ def main(connect=False, running_only=True):
             help="Batch mode. Won't use tmux to run cmd",
             dest='batchmode')
     parser.add_argument(
+            '-1', action='store_true',
+            default=False,
+            help='connect to only one of the result instances (choice)',
+            dest='one_only')
+    parser.add_argument(
         '--cmd', type=str, nargs='?',
         help='Run this command on resulting hosts', dest='cmd')
     parser.add_argument(
@@ -82,6 +87,7 @@ def main(connect=False, running_only=True):
     listkeys = args.listkeys
     connectcli = args.connectcli
     batchmode = args.batchmode
+    one_only = args.one_only
     cmd = args.cmd
     user = args.user
     if version:
@@ -100,9 +106,9 @@ def main(connect=False, running_only=True):
         results = searchfor(search)
         if connect or connectcli or cmd:
             if user:
-                connect_to(results, user=user, cmd=cmd, batch=batchmode)
+                connect_to(results, user=user, cmd=cmd, batch=batchmode, one_only=one_only)
             else:
-                connect_to(results, cmd=cmd, batch=batchmode)
+                connect_to(results, cmd=cmd, batch=batchmode, one_only=one_only)
 
     else:
         instances = aws_inventory(create_index=True)

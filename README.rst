@@ -4,8 +4,8 @@ Loony
 
 This script allows for querying AWS to find the right resources when you need them.
 
-USAGE:
-======
+EXAMPLES:
+=========
 In its simplest form, loony will simply return all the hosts running in AWS:
 ::
     #> loony
@@ -222,7 +222,7 @@ for you to choose which one to connect to.
 ::
     #> loony --help
     usage: main.py [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
-                   [-o [OUTPUT]] [-u [USER]] [-c] [-b] [--cmd [CMD]]
+                   [-o [OUTPUT]] [-u [USER]] [-c] [-b] [-1] [--cmd [CMD]]
                    [search [search ...]]
 
     Find stuff in AWS
@@ -239,11 +239,10 @@ for you to choose which one to connect to.
       --nocache             Force cache expiration
       -k, --keys            List all the keys for indexing or output
       --version             Print version
-      -o [OUTPUT], --out [OUTPUT]
-                            Output format eg. id,name,pub_ip
-      -u [USER], --user [USER]
-                            When connecting, what user to ssh in as
+      -o [OUTPUT], --out [OUTPUT]   Output format eg. id,name,pub_ip
+      -u [USER], --user [USER]  When connecting, what user to ssh in as
       -c, --connect         Connect to one or more instances
       -b, --batch           Batch mode. Won't use tmux to run cmd
+      -1                    connect to only one of the result instances (choice)
       --cmd [CMD]           Run this command on resulting hosts
 ::

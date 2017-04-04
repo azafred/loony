@@ -5,14 +5,14 @@ import sys
 import libtmux
 
 
-def connect_to(instances, user='', cmd='', batch=''):
+def connect_to(instances, user='', cmd='', batch='', one_only=''):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     if user:
         cmd_usr = ' -l %s ' % user
     else:
         cmd_usr = ' '
     print "choices of %s instances" % len(instances)
-    if len(instances) < 2 or batch:
+    if len(instances) < 2 or batch and not one_only:
         if len(instances) < 2 and cmd == "logs":
             ip = instances[0]['priv_ip']
             name = instances[0]['name']
@@ -29,7 +29,7 @@ def connect_to(instances, user='', cmd='', batch=''):
                 else:
                     call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
             sys.exit(0)
-    elif len(instances) <= 18:
+    elif len(instances) <= 18 and not one_only:
         # use tmux!
         init_tmux(instances, user=user, cmd=cmd)
         pass
