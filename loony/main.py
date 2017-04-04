@@ -52,6 +52,11 @@ def main(connect=False, running_only=True):
         help="Connect to one or more instances",
         dest='connectcli')
     parser.add_argument(
+            '-b', '--batch', action='store_true',
+            default=False,
+            help="Batch mode. Won't use tmux to run cmd",
+            dest='batchmode')
+    parser.add_argument(
         '--cmd', type=str, nargs='?',
         help='Run this command on resulting hosts', dest='cmd')
     parser.add_argument(
@@ -76,6 +81,7 @@ def main(connect=False, running_only=True):
     version = args.version
     listkeys = args.listkeys
     connectcli = args.connectcli
+    batchmode = args.batchmode
     cmd = args.cmd
     user = args.user
     if version:
@@ -94,9 +100,9 @@ def main(connect=False, running_only=True):
         results = searchfor(search)
         if connect or connectcli or cmd:
             if user:
-                connect_to(results, user=user, cmd=cmd)
+                connect_to(results, user=user, cmd=cmd, batch=batchmode)
             else:
-                connect_to(results, cmd=cmd)
+                connect_to(results, cmd=cmd, batch=batchmode)
 
     else:
         instances = aws_inventory(create_index=True)

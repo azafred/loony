@@ -5,22 +5,23 @@ import sys
 import libtmux
 
 
-def connect_to(instances, user='', cmd=''):
+def connect_to(instances, user='', cmd='', batch=''):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     if user:
         cmd_usr = ' -l %s ' % user
     else:
         cmd_usr = ' '
     print "choices of %s instances" % len(instances)
-    if len(instances) < 2:
+    if len(instances) < 2 or batch:
         print("Note: make sure you are connected to the VPN!")
-        ip = instances[0]['priv_ip']
-        name = instances[0]['name']
-        print("connecting to: %s - %s " % (name, ip))
-        if cmd:
-            call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
-        else:
-            call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
+        for inst in instances:
+            ip = inst['priv_ip']
+            name = inst['name']
+            print("connecting to: %s - %s " % (name, ip))
+            if cmd:
+                call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+            else:
+                call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
         sys.exit(0)
     elif len(instances) <= 18:
         # use tmux!

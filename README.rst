@@ -155,9 +155,11 @@ And for more than one server:
 
 Also you can run a command on all the server instances that are returned
 ::
-    #> loony --cmd 'ps -auxw | grep tomcat' role=webapp env=production
+    #> loony --cmd 'ps auxw | grep tomcat' role=webapp env=production
 
-
+If you want to run commands serially on a multitude of servers without using tmux (ie: non-interactively):
+::
+    #> loony --cmd 'ps auxw | grep tomcat' -b role=webapp env=production
 
 INSTALL
 =======
@@ -217,9 +219,9 @@ for you to choose which one to connect to.
 
 ::
     #> loony --help
-    usage: loony [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
-                 [-o [OUTPUT]] [-u [USER]] [-c]  [--cmd [CMD]]
-                 [search [search ...]]
+    usage: main.py [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
+                   [-o [OUTPUT]] [-u [USER]] [-c] [-b] [--cmd [CMD]]
+                   [search [search ...]]
 
     Find stuff in AWS
 
@@ -240,5 +242,6 @@ for you to choose which one to connect to.
       -u [USER], --user [USER]
                             When connecting, what user to ssh in as
       -c, --connect         Connect to one or more instances
+      -b, --batch           Batch mode. Won't use tmux to run cmd
       --cmd [CMD]           Run this command on resulting hosts
 ::
