@@ -153,6 +153,11 @@ And for more than one server:
 
 .. image:: tmux.png
 
+Also you can run a command on all the server instances that are returned
+::
+    #> loony --cmd 'ps -auxw | grep tomcat' role=webapp env=production
+
+
 
 INSTALL
 =======
@@ -213,7 +218,7 @@ for you to choose which one to connect to.
 ::
     #> loony --help
     usage: loony [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
-                 [-o [OUTPUT]] [-u [USER]] [-c]
+                 [-o [OUTPUT]] [-u [USER]] [-c]  [--cmd [CMD]]
                  [search [search ...]]
 
     Find stuff in AWS
@@ -235,4 +240,5 @@ for you to choose which one to connect to.
       -u [USER], --user [USER]
                             When connecting, what user to ssh in as
       -c, --connect         Connect to one or more instances
+      --cmd [CMD]           Run this command on resulting hosts
 ::

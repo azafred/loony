@@ -5,7 +5,7 @@ import sys
 import libtmux
 
 
-def connect_to(instances, user=''):
+def connect_to(instances, user='', cmd=''):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     if user:
         cmd_usr = ' -l %s ' % user
@@ -15,12 +15,16 @@ def connect_to(instances, user=''):
     if len(instances) < 2:
         print("Note: make sure you are connected to the VPN!")
         ip = instances[0]['priv_ip']
-        print("Connecting to %s" % ip)
-        call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
+        name = instances[0]['name']
+        print("connecting to: %s - %s " % (name, ip))
+        if cmd:
+            call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+        else:
+            call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
         sys.exit(0)
     elif len(instances) <= 18:
         # use tmux!
-        init_tmux(instances, user=user)
+        init_tmux(instances, user=user, cmd=cmd)
         pass
     else:
         dest = raw_input("Connect to instance number: (0 to quit) ")
@@ -33,12 +37,17 @@ def connect_to(instances, user=''):
                 ip = inst['priv_ip']
                 print("Note: make sure you are connected to the VPN!")
                 print("connecting to: %s " % ip)
-                call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
+                if cmd:
+                    print("Running %s on %s" % (cmd, inst['name']))
+                    call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+                else:
+                    call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
                 sys.exit(0)
-    print("An error has occured.")
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
+    logmap = [{'role': 'webapp', 'log': '/var/log/tomcat-webapp/studyblue.log'},
+              {'role': 'openapi', 'log': '/var/log/tomcat-openapi/openapi.log'}]
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     num_panes = 6
     pindex = 0
@@ -66,20 +75,17 @@ def init_tmux(instances, title='loony', cmd='', user=''):
                 index = '%%%i' % (pindex * windex)
             else:
                 index = '%%%i' % (pindex * windex + windex)
-            print index
             b = w.select_pane(index)
             b.cmd('kill-pane')
             new_window=False
-        # if pindex == 0:
-        #     b = w.select_pane(pindex - 1 )
-        #     b.cmd('kill-pane')
-
         p.send_keys("echo 'connecting to  %s'" % inst['name'])
+        # p.send_keys("echo %s | figlet" % inst['name'])
         p.send_keys("ssh" + ssh_opt + cmd_usr + inst['priv_ip'])
-        # p.select_pane()
+        if cmd == 'logs':
+            pass
+        elif cmd:
+            p.send_keys(cmd)
         pindex += 1
         w.select_layout('tiled')
     w.select_layout('tiled')
-    
-    # p2 = w.split_window(attach=False, window_name="blah", vertical=False)
     session.attach_session()

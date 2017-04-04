@@ -52,6 +52,9 @@ def main(connect=False, running_only=True):
         help="Connect to one or more instances",
         dest='connectcli')
     parser.add_argument(
+        '--cmd', type=str, nargs='?',
+        help='Run this command on resulting hosts', dest='cmd')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -73,6 +76,7 @@ def main(connect=False, running_only=True):
     version = args.version
     listkeys = args.listkeys
     connectcli = args.connectcli
+    cmd = args.cmd
     user = args.user
     if version:
         show_version()
@@ -88,11 +92,11 @@ def main(connect=False, running_only=True):
     elif search:
         print "Searching for %s" % search
         results = searchfor(search)
-        if connect or connectcli:
+        if connect or connectcli or cmd:
             if user:
-                connect_to(results, user)
+                connect_to(results, user=user, cmd=cmd)
             else:
-                connect_to(results)
+                connect_to(results, cmd=cmd)
 
     else:
         instances = aws_inventory(create_index=True)
