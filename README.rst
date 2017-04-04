@@ -161,6 +161,8 @@ If you want to run commands serially on a multitude of servers without using tmu
 ::
     #> loony --cmd 'ps auxw | grep tomcat' -b role=webapp env=production
 
+**NOTE:** if you pass 'logs' as the command, it will start tailing logs, based on list of dict defined in connect.py and/or system logs.
+
 INSTALL
 =======
 Installing those scripts is a pip command away!

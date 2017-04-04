@@ -13,16 +13,22 @@ def connect_to(instances, user='', cmd='', batch=''):
         cmd_usr = ' '
     print "choices of %s instances" % len(instances)
     if len(instances) < 2 or batch:
-        print("Note: make sure you are connected to the VPN!")
-        for inst in instances:
-            ip = inst['priv_ip']
-            name = inst['name']
+        if len(instances) < 2 and cmd == "logs":
+            ip = instances[0]['priv_ip']
+            name = instances[0]['name']
             print("connecting to: %s - %s " % (name, ip))
-            if cmd:
-                call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
-            else:
-                call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
-        sys.exit(0)
+            init_tmux(instances, title='logs', cmd='logs', user=user)
+        else:
+            print("Note: make sure you are connected to the VPN!")
+            for inst in instances:
+                ip = inst['priv_ip']
+                name = inst['name']
+                print("connecting to: %s - %s " % (name, ip))
+                if cmd:
+                    call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+                else:
+                    call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
+            sys.exit(0)
     elif len(instances) <= 18:
         # use tmux!
         init_tmux(instances, user=user, cmd=cmd)
@@ -47,8 +53,9 @@ def connect_to(instances, user='', cmd='', batch=''):
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
-    logmap = [{'role': 'webapp', 'log': '/var/log/tomcat-webapp/studyblue.log'},
-              {'role': 'openapi', 'log': '/var/log/tomcat-openapi/openapi.log'}]
+    systemlogs = ['/var/log/messages', '/var/log/secure', '/var/log/tallylog']
+    logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/studyblue.log']},
+              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log']}]
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     num_panes = 6
     pindex = 0
@@ -83,7 +90,13 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         # p.send_keys("echo %s | figlet" % inst['name'])
         p.send_keys("ssh" + ssh_opt + cmd_usr + inst['priv_ip'])
         if cmd == 'logs':
-            pass
+            role = inst['role']
+            try:
+                logfile = (item['log'] for item in logmap if item['role'] == role).next() + systemlogs
+                logs = " ".join(logfile)
+            except:
+                logs = " ".join(systemlogs)
+            p.send_keys("sudo tail -n 0 -f %s | grep -v INFO" % logs)
         elif cmd:
             p.send_keys(cmd)
         pindex += 1
