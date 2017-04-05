@@ -1,7 +1,9 @@
 import datetime
+import time
 import decorator
 import shelve
 import os
+import boto
 from settings import *
 from hashlib import md5
 
@@ -9,14 +11,29 @@ def scached(cache_file, expiry):
     def scached_closure(func, *args, **kw):
         key = md5(':'.join([func.__name__, str(args), str(kw)])).hexdigest()
         d = shelve.open(cache_file)
+        changes = False
 
         # Expire old data if we have to
         if key in d:
             if d[key]['expires_on'] < datetime.datetime.now():
                 del d[key]
-
+            print "Cache set to expire on %s" % d[key]['expires_on']
+            print "Checking for changes..."
+            dt_earlier = d[key]['expires_on'] - expiry
+            earlier = time.mktime(dt_earlier.timetuple())
+            stime = datetime.datetime.now()
+            now = time.mktime(stime.timetuple())
+            ct = boto.connect_cloudtrail()
+            # print "earlier: %s - %s" % (earlier, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(earlier)))
+            # print "now: %s - %s" % (now, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(now)))
+            events = ct.lookup_events(start_time=earlier, end_time=now)['Events']
+            for ev in events:
+                if ev['EventName'] == 'UpdateAutoScalingGroup':
+                    ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
+                    print(" !! Change detected: Group: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
+                    changes = True
         # Get new data if we have to
-        if key not in d:
+        if key not in d or changes:
             print "Please wait while I rebuild the cache... "
             data = func(*args, **kw)
             d[key] = {

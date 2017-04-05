@@ -1,11 +1,11 @@
 import boto.ec2
-import datetime
+from datetime import datetime, timedelta
 import __builtin__
 from cache import scached
 from settings import *
 
 
-@scached(cache_file=cache_file, expiry=datetime.timedelta(minutes=cache_lifetime))
+@scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
 def aws_inventory(create_index=False):
     instances = []
     index = 1
