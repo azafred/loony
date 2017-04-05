@@ -167,17 +167,17 @@ INSTALL
 =======
 Installing those scripts is a pip command away!
 This command will do the trick:
-
-sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
+::
+#> sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
 
 
 (don't use sudo if you are in a virtualenv, but the script will then only be available when in that virtualenv...)
 
 One could also clone the repo and run
-
-git clone ssh://git@github.com/StudyBlue/loony.git
-cd loony
-python setup.py install
+::
+#> git clone ssh://git@github.com/StudyBlue/loony.git
+#> cd loony
+#> python setup.py install
 
 
 SETUP
@@ -218,18 +218,14 @@ The installer will setup two scripts:
 
 The two essentially work the exact same way, but connect will offer a prompt after displaying the list of machines
 for you to choose which one to connect to.
-
 ::
     #> loony --help
     usage: main.py [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
                    [-o [OUTPUT]] [-u [USER]] [-c] [-b] [-1] [--cmd [CMD]]
                    [search [search ...]]
-
     Find stuff in AWS
-
     positional arguments:
       search                Search parameters
-
     optional arguments:
       -h, --help            show this help message and exit
       -v, --verbose         Increase log verbosity
