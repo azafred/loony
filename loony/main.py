@@ -32,7 +32,7 @@ def main(connect=False, running_only=True):
         '--long', action='store_true', default=False,
         help='Display long-format results', dest='long')
     parser.add_argument(
-        '--nocache', action='store_true', default=False,
+        '-nc', '--nocache', action='store_true', default=False,
         help='Force cache expiration', dest='nocache')
     parser.add_argument(
         '-k', '--keys', action='store_true', default=False,

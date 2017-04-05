@@ -236,7 +236,7 @@ for you to choose which one to connect to.
       -d, --debug           Debug level verbosity
       --short               Display short-format results
       --long                Display long-format results
-      --nocache             Force cache expiration
+      -nc, --nocache             Force cache expiration
       -k, --keys            List all the keys for indexing or output
       --version             Print version
       -o [OUTPUT], --out [OUTPUT]   Output format eg. id,name,pub_ip

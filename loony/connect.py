@@ -3,6 +3,7 @@ from display import display_results_ordered
 from settings import *
 import sys
 import libtmux
+import shlex
 
 
 def connect_to(instances, user='', cmd='', batch='', one_only=''):
@@ -54,8 +55,8 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
 
 def init_tmux(instances, title='loony', cmd='', user=''):
     systemlogs = ['/var/log/messages', '/var/log/secure', '/var/log/tallylog']
-    logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/studyblue.log']},
-              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log']}]
+    logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/studyblue.log', '/var/log/tomcat-webapp/catalina.out']},
+              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log', '/var/log/tomcat-openapi/catalina.out']}]
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     num_panes = 6
     pindex = 0
@@ -102,4 +103,6 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         pindex += 1
         w.select_layout('tiled')
     w.select_layout('tiled')
-    session.attach_session()
+    # session.attach_session()
+    tmux = shlex.split("tmux -CC attach")
+    call(tmux)
