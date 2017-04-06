@@ -26,12 +26,11 @@ def scached(cache_file, expiry):
             ct = boto.connect_cloudtrail()
             # print "earlier: %s - %s" % (earlier, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(earlier)))
             # print "now: %s - %s" % (now, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(now)))
-            events = ct.lookup_events(start_time=earlier, end_time=now)['Events']
+            events = ct.lookup_events(start_time=earlier, end_time=now, lookup_attributes=[{'AttributeKey': 'EventName', 'AttributeValue': 'RunInstances'}])['Events']
             for ev in events:
-                if ev['EventName'] == 'UpdateAutoScalingGroup':
-                    ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
-                    print(" !! Change detected: Group: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
-                    changes = True
+                ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
+                print(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
+                changes = True
         # Get new data if we have to
         if key not in d or changes:
             print "Please wait while I rebuild the cache... "
