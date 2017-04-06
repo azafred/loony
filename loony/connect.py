@@ -4,7 +4,7 @@ from settings import *
 import sys
 import libtmux
 import shlex
-
+import random
 
 def connect_to(instances, user='', cmd='', batch='', one_only=''):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
@@ -67,7 +67,9 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     else:
         cmd_usr =' '
     server = libtmux.Server()
-    session = server.new_session(title)
+    rand_session = random.randint(1,100)
+    rand_title = title + str(rand_session)
+    session = server.new_session(rand_title)
     # some logic and if loops here....
     w = session.select_window('@0')
     for inst in instances:
