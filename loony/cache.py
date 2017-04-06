@@ -1,11 +1,18 @@
+from __future__ import print_function
+
 import datetime
 import time
 import decorator
 import shelve
 import os
+import sys
 import boto
 from settings import *
 from hashlib import md5
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
 
 def scached(cache_file, expiry):
     def scached_closure(func, *args, **kw):
@@ -17,8 +24,8 @@ def scached(cache_file, expiry):
         if key in d:
             if d[key]['expires_on'] < datetime.datetime.now():
                 del d[key]
-            print "Cache set to expire on %s" % d[key]['expires_on']
-            print "Checking for changes..."
+            eprint("Cache set to expire on %s" % d[key]['expires_on'])
+            eprint("Checking for changes...")
             dt_earlier = d[key]['expires_on'] - expiry
             earlier = time.mktime(dt_earlier.timetuple())
             stime = datetime.datetime.now()
@@ -29,11 +36,11 @@ def scached(cache_file, expiry):
             events = ct.lookup_events(start_time=earlier, end_time=now, lookup_attributes=[{'AttributeKey': 'EventName', 'AttributeValue': 'RunInstances'}])['Events']
             for ev in events:
                 ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
-                print(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
+                eprint(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
                 changes = True
         # Get new data if we have to
         if key not in d or changes:
-            print "Please wait while I rebuild the cache... "
+            eprint("Please wait while I rebuild the cache... ")
             data = func(*args, **kw)
             d[key] = {
                 'expires_on' : datetime.datetime.now() + expiry,
@@ -51,7 +58,7 @@ def expire_cache(cache_file=cache_file):
     try:
         cache_file = cache_file + ".db"
         os.remove(cache_file)
-        print "Cache removed."
+        eprint("Cache removed.")
     except:
-        print "Something happened and I was not able to remove the cache file."
-        print "Please remove %s manually" % cache_file
+        eprint("Something happened and I was not able to remove the cache file.")
+        eprint("Please remove %s manually" % cache_file)
