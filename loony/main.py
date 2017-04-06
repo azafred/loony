@@ -57,6 +57,11 @@ def main(connect=False, running_only=True):
             help="Batch mode. Won't use tmux to run cmd",
             dest='batchmode')
     parser.add_argument(
+            '-nt','--notable', action='store_true',
+            default=False,
+            help="Don't print an ascii table",
+            dest='notable')
+    parser.add_argument(
             '-1', action='store_true',
             default=False,
             help='connect to only one of the result instances (choice)',
@@ -88,6 +93,7 @@ def main(connect=False, running_only=True):
     connectcli = args.connectcli
     batchmode = args.batchmode
     one_only = args.one_only
+    notable = args.notable
     cmd = args.cmd
     user = args.user
     if version:
@@ -105,7 +111,7 @@ def main(connect=False, running_only=True):
         list_keys()
     elif search:
         print "Searching for %s" % search
-        results = searchfor(search)
+        results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:
                 connect_to(results, user=user, cmd=cmd, batch=batchmode, one_only=one_only)
@@ -114,7 +120,7 @@ def main(connect=False, running_only=True):
 
     else:
         instances = aws_inventory(create_index=True)
-        display_results_ordered(instances)
+        display_results_ordered(instances, notable=notable)
 
 def show_version():
     print "Loony version %s " % __version__

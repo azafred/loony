@@ -2,7 +2,7 @@ import prettytable
 import __builtin__
 from colorama import Fore, Style
 
-def display_results_ordered(results):
+def display_results_ordered(results, notable=''):
     if __builtin__.short:
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif __builtin__.long:
@@ -19,4 +19,7 @@ def display_results_ordered(results):
     for r in results:
         # tags = str(r['tags'])
         t.add_row([r[x] for x in display_columns])
-    print(t)
+    if notable:
+        print(t.get_string(border=False, padding_width=1, header=False))
+    else:
+        print(t)

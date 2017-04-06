@@ -3,7 +3,7 @@ from aws_fetcher import aws_inventory
 from display import display_results_ordered
 from pprint import pprint
 
-def searchfor(items):
+def searchfor(items, notable=''):
     aws = aws_inventory()
     results_per_item = {}
     result_counter = {}
@@ -50,5 +50,5 @@ def searchfor(items):
         index += 1
     if len(result) >= 1:
         # print and_result
-        display_results_ordered(result)
+        display_results_ordered(result, notable=notable)
     return result
