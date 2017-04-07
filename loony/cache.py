@@ -1,14 +1,13 @@
 from __future__ import print_function
-
+from hashlib import md5
+from settings import *
 import datetime
 import time
-import decorator
 import shelve
 import os
 import sys
 import boto
-from settings import *
-from hashlib import md5
+import decorator
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)

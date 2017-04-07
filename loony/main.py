@@ -52,20 +52,20 @@ def main(connect=False, running_only=True):
         help="Connect to one or more instances",
         dest='connectcli')
     parser.add_argument(
-            '-b', '--batch', action='store_true',
-            default=False,
-            help="Batch mode. Won't use tmux to run cmd",
-            dest='batchmode')
+        '-b', '--batch', action='store_true',
+        default=False,
+        help="Batch mode. Won't use tmux to run cmd",
+        dest='batchmode')
     parser.add_argument(
-            '-nt','--notable', action='store_true',
-            default=False,
-            help="Don't print an ascii table",
-            dest='notable')
+        '-nt', '--notable', action='store_true',
+        default=False,
+        help="Don't print an ascii table",
+        dest='notable')
     parser.add_argument(
-            '-1', action='store_true',
-            default=False,
-            help='connect to only one of the result instances (choice)',
-            dest='one_only')
+        '-1', action='store_true',
+        default=False,
+        help='connect to only one of the result instances (choice)',
+        dest='one_only')
     parser.add_argument(
         '--cmd', type=str, nargs='?',
         help='Run this command on resulting hosts', dest='cmd')
