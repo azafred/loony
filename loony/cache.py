@@ -36,8 +36,9 @@ def scached(cache_file, expiry):
             events = ct.lookup_events(start_time=earlier, end_time=now, lookup_attributes=[{'AttributeKey': 'EventName', 'AttributeValue': 'RunInstances'}])['Events']
             for ev in events:
                 ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
-                eprint(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
-                changes = True
+                if 'ami' in ev['Resources'][0]['ResourceName']:
+                    eprint(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
+                    changes = True
         # Get new data if we have to
         if key not in d or changes:
             eprint("Please wait while I rebuild the cache... ")
