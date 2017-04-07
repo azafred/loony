@@ -42,30 +42,30 @@ def aws_inventory(create_index=False):
 
                 monitored = inst.monitored
                 if create_index:
-                    instances.append({'index'         : index, 'id': id, 'name': name, 'location': location,
-                                     'size'          : size,
-                                     'pub_ip'        : public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
-                                     'priv_dns'      : priv_dns,
-                                     'status'        : inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                     'monitored'     : monitored, 'tags': inst.tags, 'tags_txt': tags_txt,
-                                     'env'           : env, 'role': role, 'master': master,
-                                     'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
-                                     'cfn_stack_name': cfn_stack_name,
-                                     'as_group_name' : as_group_name,
-                                     'launch_time'   : launch_time})
+                    instances.append({'index': index, 'id': id, 'name': name, 'location': location,
+                                      'size': size,
+                                      'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
+                                      'priv_dns': priv_dns,
+                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
+                                      'monitored': monitored, 'tags': inst.tags, 'tags_txt': tags_txt,
+                                      'env': env, 'role': role, 'master': master,
+                                      'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
+                                      'cfn_stack_name': cfn_stack_name,
+                                      'as_group_name': as_group_name,
+                                      'launch_time': launch_time})
                     index += 1
                 else:
-                    instances.append({'id'            : id, 'name': name, 'location': location, 'size': size,
-                                     'tags'          : inst.tags,
-                                     'pub_ip'        : public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
-                                     'priv_dns'      : priv_dns,
-                                     'env'           : env, 'role': role, 'master': master,
-                                     'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
-                                     'cfn_stack_name': cfn_stack_name,
-                                     'as_group_name' : as_group_name,
-                                     'status'        : inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                     'monitored'     : monitored,
-                                     'launch_time'   : launch_time, 'tags_txt': tags_txt})
+                    instances.append({'id': id, 'name': name, 'location': location, 'size': size,
+                                      'tags': inst.tags,
+                                      'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
+                                      'priv_dns': priv_dns,
+                                      'env': env, 'role': role, 'master': master,
+                                      'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
+                                      'cfn_stack_name': cfn_stack_name,
+                                      'as_group_name': as_group_name,
+                                      'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
+                                      'monitored': monitored,
+                                      'launch_time': launch_time, 'tags_txt': tags_txt})
     return instances
 
 def list_keys():
