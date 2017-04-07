@@ -8,6 +8,7 @@ EXAMPLES:
 =========
 In its simplest form, loony will simply return all the hosts running in AWS:
 ::
+
     #> loony
     Please wait while I rebuild the cache...
     +-------+------------------------------------------------------+---------------------+----------------+------------+--------------------------+---------------------------------------------------------------------------------------------------------+
@@ -126,9 +127,9 @@ To access this wonderful featuer, simply add -c to your loony command, or use th
     Connecting to 172.16.61.241
     Last login: Mon Apr  3 09:52:06 2017 from 192.168.150.144
 
-           __|  __|_  )
-           _|  (     /   Amazon Linux AMI
-          ___|\___|___|
+            __|  __|_  )
+            _|  (     /   Amazon Linux AMI
+            ___|\___|___|
 
     https://aws.amazon.com/amazon-linux-ami/2016.09-release-notes/
     [fred@jobserver-i-0b4b509cd8e988144 ~]$
@@ -186,7 +187,6 @@ In order to work ~/.aws/credentials needs to be setup. This is the same file tha
 similar to this:
 
 ::
-
     [default]
     region = us-east-1
     aws_access_key_id = blahblah
@@ -221,24 +221,23 @@ for you to choose which one to connect to.
 ::
     #> loony --help
     usage: main.py [-h] [-v] [-d] [--short] [--long] [--nocache] [-k] [--version]
-                   [-o [OUTPUT]] [-u [USER]] [-c] [-b] [-1] [--cmd [CMD]]
-                   [search [search ...]]
+                    [-o [OUTPUT]] [-u [USER]] [-c] [-b] [-1] [--cmd [CMD]]
+                    [search [search ...]]
     Find stuff in AWS
     positional arguments:
-      search                Search parameters
+        search                Search parameters
     optional arguments:
-      -h, --help            show this help message and exit
-      -v, --verbose         Increase log verbosity
-      -d, --debug           Debug level verbosity
-      --short               Display short-format results
-      --long                Display long-format results
-      -nc, --nocache             Force cache expiration
-      -k, --keys            List all the keys for indexing or output
-      --version             Print version
-      -o [OUTPUT], --out [OUTPUT]   Output format eg. id,name,pub_ip
-      -u [USER], --user [USER]  When connecting, what user to ssh in as
-      -c, --connect         Connect to one or more instances
-      -b, --batch           Batch mode. Won't use tmux to run cmd
-      -1                    connect to only one of the result instances (choice)
-      --cmd [CMD]           Run this command on resulting hosts
-::
+        -h, --help            show this help message and exit
+        -v, --verbose         Increase log verbosity
+        -d, --debug           Debug level verbosity
+        --short               Display short-format results
+        --long                Display long-format results
+        -nc, --nocache             Force cache expiration
+        -k, --keys            List all the keys for indexing or output
+        --version             Print version
+        -o [OUTPUT], --out [OUTPUT]   Output format eg. id,name,pub_ip
+        -u [USER], --user [USER]  When connecting, what user to ssh in as
+        -c, --connect         Connect to one or more instances
+        -b, --batch           Batch mode. Won't use tmux to run cmd
+        -1                    connect to only one of the result instances (choice)
+        --cmd [CMD]           Run this command on resulting hosts
