@@ -71,7 +71,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     rand_title = title + str(rand_session)
     session = server.new_session(rand_title, kill_session=True)
     # some logic and if loops here....
-    w = session.select_window('-l')
+    w = session.windows[0]
     for inst in instances:
         if pindex % num_panes == 0 and pindex != 0:
             blah = title + str(pindex)
