@@ -107,10 +107,6 @@ def init_tmux(instances, title='loony', cmd='', user=''):
             # w = session.select_window(x)
         p = w.split_window(attach=True, vertical=True)
         if new_window:
-            if windex == 0:
-                index = '%%%i' % (pindex * windex)
-            else:
-                index = '%%%i' % (pindex * windex + windex)
             b = w.panes[0]
             b.cmd('kill-pane')
             new_window = False
