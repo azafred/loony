@@ -11,6 +11,7 @@ from search import searchfor
 from connect import connect_to
 from cache import expire_cache
 from settings import *
+from ._version import get_versions
 
 
 def connect():
