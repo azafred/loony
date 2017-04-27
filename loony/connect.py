@@ -111,7 +111,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
                 index = '%%%i' % (pindex * windex)
             else:
                 index = '%%%i' % (pindex * windex + windex)
-            b = w.select_pane(index)
+            b = w.panes[0]
             b.cmd('kill-pane')
             new_window = False
         p.send_keys("echo 'connecting to  %s'" % inst['name'])
