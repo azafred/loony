@@ -11,7 +11,7 @@ from search import searchfor
 from connect import connect_to
 from cache import expire_cache
 from settings import *
-from version import __version__
+
 
 def connect():
     main(connect=True, running_only=True)

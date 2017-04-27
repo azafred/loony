@@ -1,0 +1,2 @@
+include versioneer.py
+include loony/_version.py

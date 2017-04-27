@@ -1,10 +1,34 @@
+from __future__ import print_function
 from subprocess import call
-from display import display_results_ordered
-from settings import *
+from loony.display import display_results_ordered
+from loony.settings import *
 import sys
+import os
 import libtmux
 import shlex
 import random
+
+
+def is_tmux():
+    signal = call(['which', 'tmux'])
+    if signal == 0:
+        return True
+    else:
+        print("Tmux not detected. I recommend you install it! (on mac: brew install tmux)")
+        return False
+
+
+def is_iterm():
+    try:
+        term = os.environ['TERM_PROGRAM']
+        if term == 'iTerm.app':
+            return True
+        else:
+            print("It doesn't appear that you are running iTerm. If you are on a mac, I would strongly recommend it for its useful tmux integration!")
+            return False
+    except:
+        return False
+
 
 def connect_to(instances, user='', cmd='', batch='', one_only=''):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
@@ -12,7 +36,7 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
         cmd_usr = ' -l %s ' % user
     else:
         cmd_usr = ' '
-    print "choices of %s instances" % len(instances)
+    print("choices of %s instances" % len(instances))
     if len(instances) < 2 or batch and not one_only:
         if len(instances) < 2 and cmd == "logs":
             ip = instances[0]['priv_ip']
@@ -30,14 +54,14 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
                 else:
                     call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
             sys.exit(0)
-    elif len(instances) <= 18 and not one_only:
+    elif len(instances) <= 18 and not one_only and is_tmux():
         # use tmux!
         init_tmux(instances, user=user, cmd=cmd)
         pass
     else:
         dest = raw_input("Connect to instance number: (0 to quit) ")
         dest = int(dest.strip())
-        print "dest: %s" % dest
+        print("dest: %s" % dest)
         if dest == 0:
             sys.exit(0)
         for inst in instances:
@@ -65,9 +89,9 @@ def init_tmux(instances, title='loony', cmd='', user=''):
     if user:
         cmd_usr = ' -l %s ' % user
     else:
-        cmd_usr =' '
+        cmd_usr = ' '
     server = libtmux.Server()
-    rand_session = random.randint(1,100)
+    rand_session = random.randint(1, 100)
     rand_title = title + str(rand_session)
     session = server.new_session(rand_title, kill_session=True)
     # some logic and if loops here....
@@ -78,8 +102,9 @@ def init_tmux(instances, title='loony', cmd='', user=''):
             w = session.new_window(attach=False, window_name=blah)
             windex += 1
             new_window = True
-            x = '@%s' % windex
-            w = session.select_window(x)
+            # x = '@%s' % windex
+            w = session.windows[windex]
+            # w = session.select_window(x)
         p = w.split_window(attach=True, vertical=True)
         if new_window:
             if windex == 0:
@@ -88,7 +113,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
                 index = '%%%i' % (pindex * windex + windex)
             b = w.select_pane(index)
             b.cmd('kill-pane')
-            new_window=False
+            new_window = False
         p.send_keys("echo 'connecting to  %s'" % inst['name'])
         # p.send_keys("echo %s | figlet" % inst['name'])
         p.send_keys("ssh" + ssh_opt + cmd_usr + inst['priv_ip'])
@@ -111,5 +136,9 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         w.select_layout('tiled')
     w.select_layout('tiled')
     # session.attach_session()
-    tmux = shlex.split("tmux -CC attach")
-    call(tmux)
+    if is_iterm():
+        tmux = shlex.split("tmux -CC attach")
+        call(tmux)
+    else:
+        session.attach_session()
+
