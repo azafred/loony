@@ -7,10 +7,11 @@ import os
 import libtmux
 import shlex
 import random
+import subprocess
 
 
 def is_tmux():
-    signal = call(['which', 'tmux'])
+    signal = call(['which', 'tmux'], stderr=subprocess.STDOUT)
     if signal == 0:
         return True
     else:
