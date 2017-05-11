@@ -117,7 +117,7 @@ def init_tmux(instances, title='loony', cmd='', user=''):
         if cmd == 'logs':
             role = inst['role']
             try:
-                logfile = (item['log'] for item in logmap if item['role'] == role).next() + systemlogs
+                logfile = (item['log'] for item in logmap if item['role'] == role).next()
                 logs = " ".join(logfile)
             except:
                 logs = " ".join(systemlogs)
