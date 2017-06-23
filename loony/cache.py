@@ -25,7 +25,7 @@ def scached(cache_file, expiry):
 
         # Expire old data if we have to
         if key in d:
-            if d[key]['expires_on'] < datetime.datetime.now():
+            if d[key].get('expires_on', datetime.datetime.now()) < datetime.datetime.now():
                 del d[key]
             eprint("Cache set to expire on %s" % d[key]['expires_on'])
             eprint("Checking for changes...")
