@@ -30,7 +30,7 @@ setup(
     url='https://github.com/azafred/samplemod',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
-    install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'pyobjc-framework-Cocoa'],
+    install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik'],
     tests_require=['nose', 'testfixtures', 'mock'],
     test_suite="nose.collector",
     entry_points={
