@@ -3,10 +3,12 @@ from datetime import datetime, timedelta
 import __builtin__
 from cache import scached
 from settings import *
+from operator import itemgetter
+
 
 
 # @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
-def aws_inventory(create_index=False):
+def aws_inventory():
     instances = []
     index = 1
     conn = boto.connect_ec2()
@@ -37,34 +39,23 @@ def aws_inventory(create_index=False):
                 if 'aws' not in key and 'Name' not in key and 'Hostname' not in key:
                     other_tags[key] = str(val)
             tags_txt = ', '.join("{!s}={!r}".format(key, val) for (key, val) in sorted(other_tags.items()))
-
             monitored = inst.monitored
-            if create_index:
-                instances.append({'index': index, 'id': id, 'name': name, 'location': location,
-                                  'size': size,
-                                  'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
-                                  'priv_dns': priv_dns,
-                                  'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                  'monitored': monitored, 'tags': inst.tags, 'tags_txt': tags_txt,
-                                  'env': env, 'role': role, 'master': master,
-                                  'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
-                                  'cfn_stack_name': cfn_stack_name,
-                                  'as_group_name': as_group_name,
-                                  'launch_time': launch_time})
-                index += 1
-            else:
-                instances.append({'id': id, 'name': name, 'location': location, 'size': size,
-                                  'tags': inst.tags,
-                                  'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
-                                  'priv_dns': priv_dns,
-                                  'env': env, 'role': role, 'master': master,
-                                  'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
-                                  'cfn_stack_name': cfn_stack_name,
-                                  'as_group_name': as_group_name,
-                                  'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                  'monitored': monitored,
-                                  'launch_time': launch_time, 'tags_txt': tags_txt})
-    return instances
+            instances.append({'id': id, 'name': name, 'location': location,
+                                'size': size,
+                                'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
+                                'priv_dns': priv_dns,
+                                'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
+                                'monitored': monitored, 'tags': dict(inst.tags), 'tags_txt': tags_txt,
+                                'env': env, 'role': role, 'master': master,
+                                'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
+                                'cfn_stack_name': cfn_stack_name,
+                                'as_group_name': as_group_name,
+                                'launch_time': launch_time})
+    sorted_instances = sorted(instances, key=itemgetter('env', 'role', 'launch_time'))
+    for s in sorted_instances:
+        s['index'] = index
+        index += 1
+    return sorted_instances
 
 def list_keys():
     instances = aws_inventory()

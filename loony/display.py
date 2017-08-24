@@ -1,7 +1,6 @@
 import prettytable
 import __builtin__
 from colorama import Fore, Style
-from operator import itemgetter
 
 def format_cell(content, max_line_length):
     #accumulated line length
@@ -28,7 +27,7 @@ def display_results_ordered(results, notable='', cell_length=100):
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif __builtin__.long:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
-                   'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name']
+                   'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
     elif not __builtin__.output or __builtin__.output == 'normal':
         display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'launch_time', 'tags_txt']
     else:
@@ -37,8 +36,9 @@ def display_results_ordered(results, notable='', cell_length=100):
 
     t = prettytable.PrettyTable([c.capitalize() for c in display_columns])
     t.align = 'l'
-    sorted_results = sorted(results, key=itemgetter('env', 'role', 'launch_time'))
-    for r in sorted_results:
+    # sorted_results = sorted(results, key=itemgetter('env', 'role', 'launch_time'))
+
+    for r in results:
         # tags = str(r['tags'])
         if 'true' in r.get('master', ''):
             t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])

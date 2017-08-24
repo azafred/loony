@@ -84,7 +84,7 @@ def main(connect=False, running_only=True):
     __builtin__.long = args.long
     if args.output:
         output = args.output.split(',')
-        __builtin__.output = output
+        __builtin__.output = output.lower()
     else:
         __builtin__.output = prefered_output
     search = args.search
@@ -120,7 +120,7 @@ def main(connect=False, running_only=True):
                 connect_to(results, cmd=cmd, batch=batchmode, one_only=one_only)
 
     else:
-        instances = aws_inventory(create_index=True)
+        instances = aws_inventory()
         display_results_ordered(instances, notable=notable)
 
 def show_version():
