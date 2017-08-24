@@ -71,6 +71,9 @@ def main(connect=False, running_only=True):
         '--cmd', type=str, nargs='?',
         help='Run this command on resulting hosts', dest='cmd')
     parser.add_argument(
+        "--or", metavar='orsearch', type=str, nargs='*',
+        help='things to or in a search', dest='orsearch')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -88,6 +91,7 @@ def main(connect=False, running_only=True):
     else:
         __builtin__.output = prefered_output
     search = args.search
+    orsearch = args.orsearch
     nocache = args.nocache
     version = args.version
     listkeys = args.listkeys
@@ -111,8 +115,12 @@ def main(connect=False, running_only=True):
     if listkeys:
         list_keys()
     elif search:
-        print "Searching for %s" % search
-        results = searchfor(search, notable=notable)
+        if orsearch:
+            print "Searching for {} or {}".format(search, orsearch)
+            results = searchfor(search, orsearch, notable=notable)
+        else:
+            print "Searching for %s" % search
+            results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:
                 connect_to(results, user=user, cmd=cmd, batch=batchmode, one_only=one_only)
