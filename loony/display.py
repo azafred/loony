@@ -1,8 +1,29 @@
 import prettytable
 import __builtin__
 from colorama import Fore, Style
+from operator import itemgetter
 
-def display_results_ordered(results, notable=''):
+def format_cell(content, max_line_length):
+    #accumulated line length
+    ACC_length = 0
+    words = content.split(" ")
+    formatted_content = ""
+    for word in words:
+        #if ACC_length + len(word) and a space is <= max_line_length 
+        if ACC_length + (len(word) + 1) <= max_line_length:
+            #append the word and a space
+            formatted_content = formatted_content + word + " "
+            #length = length + length of word + length of space
+            ACC_length = ACC_length + len(word) + 1
+        else:
+            #append a line break, then the word and a space
+            formatted_content = formatted_content + "\n" + word + " "
+            #reset counter of length to the length of a word and a space
+            ACC_length = len(word) + 1
+    return formatted_content
+
+
+def display_results_ordered(results, notable='', cell_length=100):
     if __builtin__.short:
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif __builtin__.long:
@@ -16,9 +37,13 @@ def display_results_ordered(results, notable=''):
 
     t = prettytable.PrettyTable([c.capitalize() for c in display_columns])
     t.align = 'l'
-    for r in results:
+    sorted_results = sorted(results, key=itemgetter('env', 'role', 'launch_time'))
+    for r in sorted_results:
         # tags = str(r['tags'])
-        t.add_row([r[x] for x in display_columns])
+        if 'true' in r.get('master', ''):
+            t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
+        else:
+            t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
     if notable:
         print(t.get_string(border=False, padding_width=1, header=False))
     else:

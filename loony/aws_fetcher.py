@@ -5,7 +5,7 @@ from cache import scached
 from settings import *
 
 
-@scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
+# @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
 def aws_inventory(create_index=False):
     instances = []
     index = 1
@@ -36,7 +36,7 @@ def aws_inventory(create_index=False):
             for (key, val) in inst.tags.items():
                 if 'aws' not in key and 'Name' not in key and 'Hostname' not in key:
                     other_tags[key] = str(val)
-            tags_txt = ', '.join("{!s}={!r}".format(key, val) for (key, val) in other_tags.items())
+            tags_txt = ', '.join("{!s}={!r}".format(key, val) for (key, val) in sorted(other_tags.items()))
 
             monitored = inst.monitored
             if create_index:
