@@ -1,4 +1,7 @@
-cache_file = '/tmp/aws_inventory'
+import os
+
+user = os.environ['USER']
+cache_file = '/tmp/' + user + '-loonycache'
 prefered_output = "normal" # could be short, all or a list of columnts
 cache_lifetime = 1440 #in minutes
 display_tags = ['Env', 'Role', 'master']

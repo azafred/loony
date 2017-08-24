@@ -71,7 +71,7 @@ def main(connect=False, running_only=True):
         '--cmd', type=str, nargs='?',
         help='Run this command on resulting hosts', dest='cmd')
     parser.add_argument(
-        "--or", metavar='orsearch', type=str, nargs='*',
+        '-or', "--or", metavar='orsearch', type=str, nargs='*',
         help='things to or in a search', dest='orsearch')
     parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
