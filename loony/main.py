@@ -116,10 +116,10 @@ def main(connect=False, running_only=True):
         list_keys()
     elif search:
         if orsearch:
-            print "Searching for {} or {}".format(search, orsearch)
+            print( "Searching for {} or {}").format(search, orsearch)
             results = searchfor(search, orsearch, notable=notable)
         else:
-            print "Searching for %s" % search
+            print( "Searching for %s" )% search
             results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:
@@ -133,7 +133,7 @@ def main(connect=False, running_only=True):
 
 def show_version():
     __version__ = get_versions()['version']
-    print "Loony version %s " % __version__
+    print( "Loony version %s ") % __version__
 
 
 if __name__ == '__main__':
