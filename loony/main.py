@@ -87,7 +87,7 @@ def main(connect=False, running_only=True):
     __builtin__.long = args.long
     if args.output:
         output = args.output.split(',')
-        __builtin__.output = output.lower()
+        __builtin__.output = output
     else:
         __builtin__.output = prefered_output
     search = args.search
