@@ -8,7 +8,7 @@ from decorating import animated
 
 
 # @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
-@animated
+@animated('Loading data')
 def aws_inventory():
     instances = []
     index = 1
