@@ -4,7 +4,7 @@ import __builtin__
 from cache import scached
 from settings import *
 from operator import itemgetter
-from decorating import aniated
+from decorating import animated
 
 
 # @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
