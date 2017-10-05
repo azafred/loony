@@ -108,8 +108,6 @@ def main(connect=False, running_only=True):
         logging.basicConfig(level=logging.INFO)
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
-    if 'loadtest' in search or 'staging' in search:
-        expire_cache()
     if nocache:
         expire_cache()
     if listkeys:
