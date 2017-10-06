@@ -46,7 +46,7 @@ def check_aws_creds():
 def upgrade_loony():
     cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
     parsed_cmd = shlex.split(cmd)
-    exit_code = check_call([parsed_cmd])
+    exit_code = check_call(parsed_cmd)
     print(exit_code)
 
 
