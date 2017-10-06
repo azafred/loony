@@ -12,6 +12,7 @@ from connect import connect_to
 from cache import expire_cache
 from settings import *
 from _version import get_versions
+from version import __version__
 
 
 def check_aws_creds():
@@ -158,7 +159,7 @@ def main(connect=False, running_only=True):
         display_results_ordered(instances, notable=notable)
 
 def show_version():
-    __version__ = get_versions()['version']
+    # __version__ = get_versions()['version']
     print( "Loony version %s ") % __version__
 
 
