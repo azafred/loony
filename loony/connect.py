@@ -131,11 +131,11 @@ def init_tmux(instances, title='loony', cmd='', user=''):
             except:
                 logs = " ".join(systemlogs)
             p.send_keys("echo 'tailing the following logs: %s'" % logs)
-            p.send_keys("sudo tail -n 0 -fq  %s | grep -v INFO | grep -v 'network_id cookie not set'" % logs)
+            p.send_keys("sudo tail -n 0 -fq  %s | grep -v 'network_id cookie not set'" % logs)
         elif cmd == 'syslogs':
             logs = " ".join(systemlogs)
             p.send_keys("echo 'tailing the following logs: %s'" % logs)
-            p.send_keys("sudo tail -n 0 -fq  %s | grep -v INFO" % logs)
+            p.send_keys("sudo tail -n 0 -fq  %s " % logs)
         elif cmd:
             p.send_keys(cmd)
         pindex += 1
