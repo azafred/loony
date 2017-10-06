@@ -4,7 +4,7 @@
 import argparse
 import logging
 import __builtin__
-import sys
+import sys, os
 from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
 from search import searchfor
@@ -12,6 +12,32 @@ from connect import connect_to
 from cache import expire_cache
 from settings import *
 from _version import get_versions
+
+
+def check_aws_creds():
+    creds_ok = False
+    try:
+        with open(os.path.expanduser('~/.aws/credentials'), 'r') as fh:
+            for lines in fh.readlines():
+                if 'aws_access_key_id' in lines:
+                    creds_ok = True
+    except Exception as e:
+        print(e)
+        print("It appears your AWS credentials are not setup.\nPlease edit ~/.aws/credentials with your keys:\n")
+        print("""
+        [default]
+        region = us-east-1
+        aws_access_key_id = XXXXXXXXX
+        aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
+        output = text
+
+        [dev]
+        region = us-east-1
+        aws_access_key_id = XXXXXXXXX
+        aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
+        output = text
+        """)
+    return creds_ok
 
 
 def connect():
@@ -104,6 +130,8 @@ def main(connect=False, running_only=True):
     if version:
         show_version()
         sys.exit(0)
+    if not check_aws_creds():
+        sys.exit(1)
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     if args.debug:
