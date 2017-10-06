@@ -1,7 +1,8 @@
 from __future__ import print_function
-from subprocess import call
+from subprocess import call, Popen
 from loony.display import display_results_ordered
 from loony.settings import *
+from colorama import Fore, Style
 import sys
 import os
 import libtmux
@@ -9,6 +10,7 @@ import shlex
 import random
 import subprocess
 
+FNULL = open(os.devnull, 'w')
 
 def is_tmux():
     signal = call(['which', 'tmux'], stderr=subprocess.STDOUT)
@@ -49,10 +51,16 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
             for inst in instances:
                 ip = inst['priv_ip']
                 name = inst['name']
-                print("connecting to: %s - %s " % (name, ip))
                 if cmd:
-                    call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+                    # print("[{}]".format(name))
+                    # sys.stdout.flush()
+                    proc = Popen("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True, stderr=FNULL, stdout=subprocess.PIPE)
+                    output = proc.stdout.read()
+                    for lines in output.splitlines():
+                        print(Fore.BLUE + "[{: >40}]\t".format(name) + Style.RESET_ALL, end='')
+                        print("{}".format(lines))
                 else:
+                    print("connecting to: %s - %s " % (name, ip))
                     call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
             sys.exit(0)
     elif len(instances) <= 18 and not one_only and is_tmux():
