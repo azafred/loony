@@ -5,6 +5,8 @@ import argparse
 import logging
 import __builtin__
 import sys, os
+import shlex
+from subprocess import check_call, call
 from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
 from search import searchfor
@@ -39,6 +41,13 @@ def check_aws_creds():
         output = text
         """)
     return creds_ok
+
+
+def upgrade_loony():
+    cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
+    parsed_cmd = shlex.split(cmd)
+    exit_code = check_call([parsed_cmd])
+    print(exit_code)
 
 
 def connect():
@@ -101,6 +110,10 @@ def main(connect=False, running_only=True):
         '-or', "--or", metavar='orsearch', type=str, nargs='*',
         help='things to or in a search', dest='orsearch')
     parser.add_argument(
+        '--upgrade', action='store_true', default=False,
+        help='upgrade Loony',
+        dest='upgrade')
+    parser.add_argument(
         'search', metavar='search', type=str, nargs='*',
         help='Search parameters')
 
@@ -128,6 +141,10 @@ def main(connect=False, running_only=True):
     notable = args.notable
     cmd = args.cmd
     user = args.user
+    upgrade = args.upgrade
+    if upgrade:
+        upgrade_loony()
+        sys.exit(0)
     if version:
         show_version()
         sys.exit(0)
