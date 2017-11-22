@@ -44,10 +44,10 @@ setup(
             'executable': '/usr/bin/env python',
         },
     }
-    classifiers=(
+    classifiers=[
         'Topic :: Utilities',
         'Programming Language :: Python',
         'Operating System :: MacOS',
-    ),
+    ],
 )
 
