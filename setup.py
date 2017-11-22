@@ -1,10 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 import subprocess
 from setuptools import setup, find_packages
 import versioneer
 import sys
-#sys.executable = '/usr/bin/env python'
 
 with open('README.rst') as f:
     readme = f.read()
@@ -38,11 +38,6 @@ setup(
             'loony = loony.main:main',
             'connect = loony.main:connect',
         ],
-    },
-    options={
-        'build_scripts': {
-            'executable': '/usr/bin/env python',
-        },
     },
     classifiers=[
         'Topic :: Utilities',
