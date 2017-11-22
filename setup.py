@@ -4,7 +4,7 @@ import subprocess
 from setuptools import setup, find_packages
 import versioneer
 import sys
-sys.executable = '/usr/bin/env python'
+#sys.executable = '/usr/bin/env python'
 
 with open('README.rst') as f:
     readme = f.read()
