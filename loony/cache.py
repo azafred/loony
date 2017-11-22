@@ -44,6 +44,8 @@ def scached(cache_file, expiry):
                     if 'ami' in ev['Resources'][0]['ResourceName']:
                         eprint(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
                         changes = True
+                if not changes:
+                    eprint("No changes detected. Using cache.")
             # Get new data if we have to
             if key not in d or changes:
                 eprint("Please wait while I rebuild the cache... ")

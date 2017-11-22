@@ -254,7 +254,7 @@ Creating a binary... You can create a loony binary out of the source code, so th
 To create the binary, you need pyinstaller (pip).
 
 ::
-    #> pyinstaller loony/main.py --onefile --clean -p ./loony
+    #> pyinstaller loony/main.py --onefile --clean -p ./loony -n loony
 
 Once the binary is build, it can be placed in /usr/local/bin, which is done by install.sh.
 
