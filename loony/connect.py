@@ -81,7 +81,6 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
             print("Connecting to a single instance:")
             for inst in instances:
                 if int(inst['index']) == int(dest[0]):
-                    print("Matched!")
                     ip = inst['priv_ip']
                     print("Note: make sure you are connected to the VPN!")
                     print("connecting to: %s " % ip)
@@ -95,11 +94,8 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
             targets = []
             print("Connecting to multiple targets:")
             for inst in instances:
-                print(dest)
-                print(inst['index'])
                 for i in dest:
                     if inst['index'] == int(i):
-                        print(inst)
                         targets.append(inst)
             if len(targets) > 1:
                 init_tmux(targets, user=user, cmd=cmd)
