@@ -35,14 +35,19 @@ setup(
     test_suite="nose.collector",
     entry_points={
         'console_scripts': [
-          'loony = loony.main:main',
-          'connect = loony.main:connect',
+            'loony = loony.main:main',
+            'connect = loony.main:connect',
         ],
-      },
-      classifiers=[
+    },
+    options={
+        'build_scripts': {
+            'executable': '/usr/bin/env python',
+        },
+    }
+    classifiers=(
         'Topic :: Utilities',
         'Programming Language :: Python',
         'Operating System :: MacOS',
-      ],
+    ),
 )
 
