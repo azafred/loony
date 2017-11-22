@@ -43,7 +43,7 @@ setup(
         'build_scripts': {
             'executable': '/usr/bin/env python',
         },
-    }
+    },
     classifiers=[
         'Topic :: Utilities',
         'Programming Language :: Python',
