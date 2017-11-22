@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 
 
 import argparse
@@ -15,6 +15,10 @@ from cache import expire_cache
 from settings import *
 from _version import get_versions
 from version import __version__
+
+import os
+if not os.getenv('PYTHONIOENCODING', None): # PyInstaller workaround
+    os.environ['PYTHONIOENCODING'] = 'utf_8'
 
 
 def check_aws_creds():

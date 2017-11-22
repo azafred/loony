@@ -1,4 +1,4 @@
-import boto.ec2
+﻿import boto.ec2
 from datetime import datetime, timedelta
 import __builtin__
 from cache import scached
