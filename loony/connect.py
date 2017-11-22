@@ -12,6 +12,7 @@ import subprocess
 
 FNULL = open(os.devnull, 'w')
 
+
 def is_tmux():
     signal = call(['which', 'tmux'], stderr=subprocess.STDOUT)
     if signal == 0:
@@ -105,8 +106,8 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
 
 def init_tmux(instances, title='loony', cmd='', user=''):
     systemlogs = ['/var/log/messages', '/var/log/secure', '/var/log/tallylog']
-    logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/studyblue.log', '/var/log/tomcat-webapp/catalina.out']},
-              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log', '/var/log/tomcat-openapi/catalina.out']},
+    logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/*.log', '/var/log/tomcat-webapp/catalina.out']},
+              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/*.log', '/var/log/tomcat-openapi/catalina.out']},
               {'role': 'web', 'log': ['/var/log/tomcat*/*']}]
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     num_panes = 6

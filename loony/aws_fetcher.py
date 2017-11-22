@@ -7,7 +7,7 @@ from operator import itemgetter
 from decorating import animated
 
 
-# @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
+@scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
 @animated('Loading data')
 def aws_inventory():
     instances = []
