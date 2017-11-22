@@ -3,6 +3,7 @@ from __future__ import print_function
 import datetime
 import os
 import shelve
+import dbm
 import sys
 import time
 from hashlib import md5
