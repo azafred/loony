@@ -63,33 +63,54 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
                     print("connecting to: %s - %s " % (name, ip))
                     call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
             sys.exit(0)
-    elif len(instances) <= 18 and not one_only and is_tmux():
-        # use tmux!
-        init_tmux(instances, user=user, cmd=cmd)
-        pass
+    # elif len(instances) <= 18 and not one_only and is_tmux():
+    #     # use tmux!
+    #     init_tmux(instances, user=user, cmd=cmd)
+    #     pass
     else:
-        dest = raw_input("Connect to instance number: (0 to quit) ")
-        dest = int(dest.strip())
-        print("dest: %s" % dest)
-        if dest == 0:
+        dest = raw_input("Connect to instance(s) number: (0 to quit, 'a' for all) ")
+        dest = dest.split()
+        # print("dest: %s" % dest)
+        if dest[0] == '0':
+            print("Bailing out!")
             sys.exit(0)
-        for inst in instances:
-            if int(inst['index']) == dest:
-                ip = inst['priv_ip']
-                print("Note: make sure you are connected to the VPN!")
-                print("connecting to: %s " % ip)
-                if cmd:
-                    print("Running %s on %s" % (cmd, inst['name']))
-                    call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
-                else:
-                    call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
-                sys.exit(0)
+        if dest[0] == 'a':
+            print("Connecting to all the instances listed above!")
+            init_tmux(instances, user=user, cmd=cmd)
+        if len(dest) == 1:
+            print("Connecting to a single instance:")
+            for inst in instances:
+                if int(inst['index']) == int(dest[0]):
+                    print("Matched!")
+                    ip = inst['priv_ip']
+                    print("Note: make sure you are connected to the VPN!")
+                    print("connecting to: %s " % ip)
+                    if cmd:
+                        print("Running %s on %s" % (cmd, inst['name']))
+                        call("ssh" + ssh_opt + cmd_usr + ip + " " + cmd, shell=True)
+                    else:
+                        call("ssh" + ssh_opt + cmd_usr + ip, shell=True)
+                    sys.exit(0)
+        else:
+            targets = []
+            print("Connecting to multiple targets:")
+            for inst in instances:
+                print(dest)
+                print(inst['index'])
+                for i in dest:
+                    if inst['index'] == int(i):
+                        print(inst)
+                        targets.append(inst)
+            if len(targets) > 1:
+                init_tmux(targets, user=user, cmd=cmd)
+            else:
+                print("No target found.")
 
 
 def init_tmux(instances, title='loony', cmd='', user=''):
     systemlogs = ['/var/log/messages', '/var/log/secure', '/var/log/tallylog']
     logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/studyblue.log', '/var/log/tomcat-webapp/catalina.out']},
-              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log', '/var/log/tomcat-openapi/catalina.out']}, 
+              {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/openapi.log', '/var/log/tomcat-openapi/catalina.out']},
               {'role': 'web', 'log': ['/var/log/tomcat*/*']}]
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     num_panes = 6
