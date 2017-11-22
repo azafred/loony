@@ -181,6 +181,10 @@ One could also clone the repo and run
     #> python setup.py install
 
 
+Finally, you can use the Binary version (note: connect will not be aliased and loony -c will need to be used instead). 
+
+Download the binary from `https://github.com/StudyBlue/loony/blob/master/dist/loony <https://github.com/StudyBlue/loony/blob/master/dist/loony>`_
+
 SETUP
 =====
 In order to work ~/.aws/credentials needs to be setup. This is the same file that aws-cli and boto use. It should look
@@ -241,3 +245,17 @@ for you to choose which one to connect to.
         -b, --batch           Batch mode. Won't use tmux to run cmd
         -1                    connect to only one of the result instances (choice)
         --cmd [CMD]           Run this command on resulting hosts
+
+
+ADVANCED STUFF
+==============
+
+Creating a binary... You can create a loony binary out of the source code, so that loony can be used on systems with old or no python installed.
+To create the binary, you need pyinstaller (pip).
+
+::
+    #> pyinstaller loony/main.py --onefile --clean -p ./loony
+
+Once the binary is build, it can be placed in /usr/local/bin, which is done by install.sh.
+
+Note: when running loony this way, 'connect' will not be available, so you will have to use 'loony -c' instead
