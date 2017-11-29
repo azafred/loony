@@ -28,6 +28,8 @@ NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 if [ -z "$NEEDS_TAG" ]; then
     echo "Tagged with $NEW_TAG (Ignoring fatal:cannot describe - this means commit is untagged) "
     git tag $NEW_TAG
+    pyinstaller loony/main.py --onefile --clean -p ./loony -n loony
+    git add dist/loony
     git push --tags
     git push
 else
