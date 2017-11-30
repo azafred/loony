@@ -30,6 +30,11 @@ def aws_inventory():
             env = inst.tags.get('Env', '')
             role = inst.tags.get('Role', '')
             master = inst.tags.get('master', '')
+            es_cluster = inst.tags.get('es_cluster', '')
+            bigdata = inst.tags.get('bigdata', '')
+            es_status = inst.tags.get('es_status', '')
+            rev = inst.tags.get('rev', '')
+            branch = inst.tags.get('branch', '')
             cfn_logical_id = inst.tags.get('aws:cloudformation:logical-id', '')
             cfn_stack_id = inst.tags.get('aws:cloudformation:stack-id', '')
             cfn_stack_name = inst.tags.get('aws:cloudformation:stack-name', '')
@@ -51,7 +56,12 @@ def aws_inventory():
                                 'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
                                 'cfn_stack_name': cfn_stack_name,
                                 'as_group_name': as_group_name,
-                                'launch_time': launch_time})
+                                'launch_time': launch_time,
+                                'es_cluster': es_cluster,
+                                'es_status': es_status,
+                                'bigdata': bigdata,
+                                'branch': branch,
+                                'rev': rev})
     sorted_instances = sorted(instances, key=itemgetter('env', 'role', 'launch_time'))
     for s in sorted_instances:
         s['index'] = index
