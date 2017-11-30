@@ -41,9 +41,11 @@ def display_results_ordered(results, notable='', cell_length=100):
     for r in results:
         # tags = str(r['tags'])
         if 'true' in r.get('master', ''):
-            t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
+            # t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
+            t.add_row([Fore.RED + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
         else:
-            t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
+            t.add_row([format_cell(str(r.get(x, "N/A")), cell_length) for x in display_columns])
+            # t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
     if notable:
         print(t.get_string(border=False, padding_width=1, header=False))
     else:
