@@ -30,6 +30,7 @@ if [ -z "$NEEDS_TAG" ]; then
     git tag $NEW_TAG
     pyinstaller loony/main.py --onefile --clean -p ./loony -n loony_${NEW_TAG}_macos
     git add dist/loony_${NEW_TAG}_macos
+    git commit -am "Adding new binary: loony_${NEW_TAG}_macos"
     git push --tags
     git push
 else
