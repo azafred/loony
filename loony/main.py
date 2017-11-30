@@ -71,7 +71,7 @@ def main(connect=False, running_only=True):
         help='Display short-format results', dest='short')
     parser.add_argument(
         '--long', action='store_true', default=False,
-        help='Display long-format results', dest='long')
+        help='Display long-format results', dest='long_format')
     parser.add_argument(
         '-nc', '--nocache', action='store_true', default=False,
         help='Force cache expiration', dest='nocache')
@@ -128,7 +128,7 @@ def main(connect=False, running_only=True):
     __builtin__.stopped = False
     __builtin__.running = running_only
     __builtin__.short = args.short
-    __builtin__.long = args.long
+    __builtin__.long_format = args.long_format
     if args.output:
         output = args.output.split(',')
         __builtin__.output = output

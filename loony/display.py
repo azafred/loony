@@ -25,7 +25,7 @@ def format_cell(content, max_line_length):
 def display_results_ordered(results, notable='', cell_length=100):
     if __builtin__.short:
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
-    elif __builtin__.long:
+    elif __builtin__.long_format:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
                    'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
     elif not __builtin__.output or __builtin__.output == 'normal':
