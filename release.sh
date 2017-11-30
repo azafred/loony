@@ -29,7 +29,7 @@ if [ -z "$NEEDS_TAG" ]; then
     echo "Tagged with $NEW_TAG (Ignoring fatal:cannot describe - this means commit is untagged) "
     git tag $NEW_TAG
     pyinstaller loony/main.py --onefile --clean -p ./loony -n loony_${NEW_TAG}_macos
-    git add dist/loony
+    git add dist/loony_${NEW_TAG}_macos
     git push --tags
     git push
 else
