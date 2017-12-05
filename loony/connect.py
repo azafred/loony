@@ -53,7 +53,10 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
         else:
             print("Note: make sure you are connected to the VPN!")
             for inst in instances:
-                ip = inst['priv_ip']
+                if public:
+                    ip = instances[0]['pub_ip']
+                else:
+                    ip = instances[0]['priv_ip']
                 name = inst['name']
                 if cmd:
                     # print("[{}]".format(name))
@@ -85,7 +88,10 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
             print("Connecting to a single instance:")
             for inst in instances:
                 if int(inst['index']) == int(dest[0]):
-                    ip = inst['priv_ip']
+                    if public:
+                        ip = instances[0]['pub_ip']
+                    else:
+                        ip = instances[0]['priv_ip']
                     print("Note: make sure you are connected to the VPN!")
                     print("connecting to: %s " % ip)
                     if cmd:
@@ -102,12 +108,12 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
                     if inst['index'] == int(i):
                         targets.append(inst)
             if len(targets) > 1:
-                init_tmux(targets, user=user, cmd=cmd)
+                init_tmux(targets, user=user, cmd=cmd, public=public)
             else:
                 print("No target found.")
 
 
-def init_tmux(instances, title='loony', cmd='', user=''):
+def init_tmux(instances, title='loony', cmd='', user='', public=False):
     systemlogs = ['/var/log/messages', '/var/log/secure', '/var/log/tallylog']
     logmap = [{'role': 'webapp', 'log': ['/var/log/tomcat-webapp/*.log', '/var/log/tomcat-webapp/catalina.out']},
               {'role': 'openapi', 'log': ['/var/log/tomcat-openapi/*.log', '/var/log/tomcat-openapi/catalina.out']},
@@ -143,7 +149,10 @@ def init_tmux(instances, title='loony', cmd='', user=''):
             new_window = False
         p.send_keys("echo 'connecting to  %s'" % inst['name'])
         # p.send_keys("echo %s | figlet" % inst['name'])
-        p.send_keys("ssh" + ssh_opt + cmd_usr + inst['priv_ip'])
+        if public:
+            p.send_keys("ssh" + ssh_opt + cmd_usr + inst['pub_ip'])
+        else:
+            p.send_keys("ssh" + ssh_opt + cmd_usr + inst['priv_ip'])
         if cmd == 'logs':
             role = inst['role']
             try:
