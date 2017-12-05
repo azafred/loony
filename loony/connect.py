@@ -34,7 +34,7 @@ def is_iterm():
         return False
 
 
-def connect_to(instances, user='', cmd='', batch='', one_only=''):
+def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
     ssh_opt = " -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
     if user:
         cmd_usr = ' -l %s ' % user
@@ -43,7 +43,10 @@ def connect_to(instances, user='', cmd='', batch='', one_only=''):
     print("choices of %s instances" % len(instances))
     if len(instances) < 2 or batch and not one_only:
         if len(instances) < 2 and cmd == "logs":
-            ip = instances[0]['priv_ip']
+            if public:
+                ip = instances[0]['pub_ip']
+            else:
+                ip = instances[0]['priv_ip']
             name = instances[0]['name']
             print("connecting to: %s - %s " % (name, ip))
             init_tmux(instances, title='logs', cmd='logs', user=user)

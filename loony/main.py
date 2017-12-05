@@ -93,6 +93,11 @@ def main(connect=False, running_only=True):
         help="Connect to one or more instances",
         dest='connectcli')
     parser.add_argument(
+        '-p', '--public', action='store_true',
+        default=False,
+        help="Connect via public IP instead.",
+        dest='public_ip')
+    parser.add_argument(
         '-b', '--batch', action='store_true',
         default=False,
         help="Batch mode. Won't use tmux to run cmd",
@@ -146,6 +151,7 @@ def main(connect=False, running_only=True):
     cmd = args.cmd
     user = args.user
     upgrade = args.upgrade
+    public_ip = args.public_ip
     if upgrade:
         upgrade_loony()
         sys.exit(0)
@@ -171,9 +177,9 @@ def main(connect=False, running_only=True):
             results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:
-                connect_to(results, user=user, cmd=cmd, batch=batchmode, one_only=one_only)
+                connect_to(results, public=public_ip, user=user, cmd=cmd, batch=batchmode, one_only=one_only)
             else:
-                connect_to(results, cmd=cmd, batch=batchmode, one_only=one_only)
+                connect_to(results, public=public_ip, cmd=cmd, batch=batchmode, one_only=one_only)
 
     else:
         instances = aws_inventory()
