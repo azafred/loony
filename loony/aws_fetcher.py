@@ -39,6 +39,8 @@ def aws_inventory():
             cfn_stack_id = inst.tags.get('aws:cloudformation:stack-id', '')
             cfn_stack_name = inst.tags.get('aws:cloudformation:stack-name', '')
             as_group_name = inst.tags.get('aws:autoscaling:groupName', '')
+            active_link = inst.tags.get('active_link', '')
+            num_links_connected = inst.tags.get('num_link_connected', '')
             # Stringing tags that are not relevant to indexing
             other_tags = {}
             for (key, val) in inst.tags.items():
@@ -61,7 +63,9 @@ def aws_inventory():
                                 'es_status': es_status,
                                 'bigdata': bigdata,
                                 'branch': branch,
-                                'rev': rev})
+                                'rev': rev,
+                                'active_link': active_link,
+                                'num_links_connected': num_links_connected})
     sorted_instances = sorted(instances, key=itemgetter('env', 'role', 'launch_time'))
     for s in sorted_instances:
         s['index'] = index
