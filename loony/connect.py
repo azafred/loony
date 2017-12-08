@@ -83,7 +83,7 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
             sys.exit(0)
         if dest[0] == 'a':
             print("Connecting to all the instances listed above!")
-            init_tmux(instances, user=user, cmd=cmd)
+            init_tmux(instances, user=user, cmd=cmd, public=public)
         if len(dest) == 1:
             print("Connecting to a single instance:")
             for inst in instances:
