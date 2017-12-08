@@ -6,6 +6,7 @@ from settings import *
 from operator import itemgetter
 from decorating import animated
 
+## TODO: Fix this sillyness and merge dicts instead of having to manually add each tag.
 
 @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
 @animated('Loading data')
