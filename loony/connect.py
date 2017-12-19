@@ -54,9 +54,9 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
             print("Note: make sure you are connected to the VPN!")
             for inst in instances:
                 if public:
-                    ip = instances[0]['pub_ip']
+                    ip = inst['pub_ip']
                 else:
-                    ip = instances[0]['priv_ip']
+                    ip = inst['priv_ip']
                 name = inst['name']
                 if cmd:
                     # print("[{}]".format(name))
@@ -89,9 +89,9 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
             for inst in instances:
                 if int(inst['index']) == int(dest[0]):
                     if public:
-                        ip = instances[0]['pub_ip']
+                        ip = inst['pub_ip']
                     else:
-                        ip = instances[0]['priv_ip']
+                        ip = inst['priv_ip']
                     print("Note: make sure you are connected to the VPN!")
                     print("connecting to: %s " % ip)
                     if cmd:
