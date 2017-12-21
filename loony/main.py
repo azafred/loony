@@ -159,7 +159,7 @@ def main(connect=False, running_only=True):
         show_version()
         sys.exit(0)
     if not check_aws_creds():
-        sys.exit(1)
+        sys.exit(0)
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
     if args.debug:
