@@ -1,15 +1,17 @@
 ﻿import boto.ec2
 from datetime import datetime, timedelta
 import __builtin__
+import animation
 from cache import scached
 from settings import *
 from operator import itemgetter
-from decorating import animated
+#from decorating import animated
 
 ## TODO: Fix this sillyness and merge dicts instead of having to manually add each tag.
 
 @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
-@animated('Loading data')
+#@animated('Loading data')
+@animation.wait('spinner')
 def aws_inventory():
     instances = []
     index = 1
