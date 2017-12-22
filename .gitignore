@@ -93,3 +93,4 @@ ENV/
 .vscode/temp.sql
 .vscode/
 dist/
+dist/loony
