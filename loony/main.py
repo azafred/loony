@@ -6,7 +6,9 @@ import logging
 import __builtin__
 import sys, os
 import shlex
-from subprocess import check_call, call
+import requests
+import os
+from subprocess import check_call, call, check_output
 from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
 from search import searchfor
@@ -15,8 +17,9 @@ from cache import expire_cache
 from settings import *
 from _version import get_versions
 from version import __version__
+from tqdm import tqdm
 
-import os
+
 if not os.getenv('PYTHONIOENCODING', None): # PyInstaller workaround
     os.environ['PYTHONIOENCODING'] = 'utf_8'
 
@@ -46,12 +49,39 @@ def check_aws_creds():
         """)
     return creds_ok
 
+def check_current():
+    url = "https://s3.amazonaws.com/studyblue-binaries/latest_version.txt"
+    r = requests.get(url)
+    latest = r.content.rstrip()
+    if latest == __version__:
+        #current
+        return True
+    else:
+        return False
+
 
 def upgrade_loony():
-    cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
-    parsed_cmd = shlex.split(cmd)
-    exit_code = check_call(parsed_cmd)
-    print(exit_code)
+    print("Upgrading Loony. Please wait...")
+    cur_file = os.path.realpath(__file__)
+    cmd = shlex.split('file {}'.format(cur_file))
+    filetype = check_output(cmd)
+    if 'ASCII' in filetype:
+        print("\tIt looks like you are using the python source. Upgrading via pip.")
+        cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
+        parsed_cmd = shlex.split(cmd)
+        exit_code = check_call(parsed_cmd)
+        print(exit_code)
+    else:
+        print("\tIt looks like you are running the binary version of loony. Downloading latest from S3.")
+        os_version = os.uname()[0]
+        if 'Darwin' in os_version:
+            url = "https://s3.amazonaws.com/studyblue-binaries/loony_macos_latest"
+        else:
+            url = "https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest"
+        response = requests.get(url, stream=True)
+        with open("/usr/local/bin/loony", "wb") as handle:
+            for data in tqdm(response.iter_content()):
+                handle.write(data)
 
 
 def connect():
@@ -153,6 +183,10 @@ def main(connect=False, running_only=True):
     upgrade = args.upgrade
     public_ip = args.public_ip
     if upgrade:
+        upgrade_loony()
+        sys.exit(0)
+    elif not check_current():
+        print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
         upgrade_loony()
         sys.exit(0)
     if version:
