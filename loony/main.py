@@ -170,6 +170,10 @@ def main(connect=False, running_only=True):
     else:
         __builtin__.output = prefered_output
     search = args.search
+    if 'devstack' in search:
+        __builtin__.devstack_format = True
+    else:
+        __builtin__.devstack_format = False
     orsearch = args.orsearch
     nocache = args.nocache
     version = args.version

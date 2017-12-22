@@ -27,7 +27,9 @@ def display_results_ordered(results, notable='', cell_length=100):
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif __builtin__.long_format:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
-                   'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
+                        'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
+    elif __builtin__.devstack_format:
+        display_columns = ['index', 'name', 'priv_ip', 'bigdata', 'branch', 'es_status', 'rev', 'launch_time']
     elif not __builtin__.output or __builtin__.output == 'normal':
         display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'launch_time', 'tags_txt']
     else:
