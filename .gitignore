@@ -92,5 +92,7 @@ ENV/
 .DS_Store
 .vscode/temp.sql
 .vscode/
+dist
 dist/
+dist/loony
 dist/loony

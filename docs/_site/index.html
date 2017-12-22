@@ -234,52 +234,52 @@ Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 +--------------------------------+---------------+
 </code></pre></div></div>
 <p>You can also get details on devstacks with the following handy dandy one:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loony devstack -o name,branch,es_status,rev,bigdata,launch_time
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony devstack
 Searching for ['devstack']
-Cache set to expire on 2017-12-23 11:57:00.113042
+Cache set to expire on 2017-12-23 15:16:28.665622
 Checking for changes...
 No changes detected. Using cache.
-+-------------------------------------------------+----------------------------------------------------+-----------+---------------+---------+---------------------------+
-| Name                                            | Branch                                             | Es_status | Rev           | Bigdata | Launch_time               |
-+-------------------------------------------------+----------------------------------------------------+-----------+---------------+---------+---------------------------+
-| devstack-web-arya.dev.ec2.studyblue.com         | www-arya                                           | green     | 13-1-r3dev    | false   | 2017-08-02T19:42:43.000Z  |
-| devstack-web-nymeria.dev.ec2.studyblue.com      | release-12.41.11                                   | green     | 12-41-r10dev  | True    | 2017-10-24T18:10:30.000Z  |
-| devstack-web-excelsior.dev.ec2.studyblue.com    | develop                                            | green     | 13-1-r1dev    | false   | 2017-11-14T18:39:59.000Z  |
-| devstack-web-antares.dev.ec2.studyblue.com      | develop                                            | green     | 13-1-r1dev    | false   | 2017-11-14T18:44:15.000Z  |
-| devstack-web-ajax.dev.ec2.studyblue.com         | develop                                            | green     | 13-1-r1dev    | false   | 2017-11-14T18:47:12.000Z  |
-| devstack-web-titan.dev.ec2.studyblue.com        | develop                                            | green     | 13-1-r53dev   | false   | 2017-11-29T00:20:05.000Z  |
-| devstack-web-riker.dev.ec2.studyblue.com        | CORE-772                                           | green     | 13-1-r5dev    | True    | 2017-12-05T17:14:57.000Z  |
-| devstack-web-enterprise.dev.ec2.studyblue.com   | IOS-4830-Recommended-materials-class-and-homepage  | green     | 13-1-r1dev    | True    | 2017-12-07T20:27:01.000Z  |
-| devstack-web-tyrion.dev.ec2.studyblue.com       | SUM-373_Update_UX_Pagination                       | green     | 13-1-r2dev    | True    | 2017-12-11T20:24:13.000Z  |
-| devstack-web-ludo.dev.ec2.studyblue.com         | CORE-940_TextbookInOnboarding                      | green     | 13-1-r1dev    | false   | 2017-12-11T23:51:25.000Z  |
-| devstack-web-yoda.dev.ec2.studyblue.com         | ts-15                                              | green     | 13-1-r1dev    | True    | 2017-12-12T22:51:21.000Z  |
-| devstack-web-ashitaka.dev.ec2.studyblue.com     | CORE-1032-land-on-deck                             | red       | 13-1-r5dev    | false   | 2017-12-14T00:58:03.000Z  |
-| devstack-web-rakibul.dev.ec2.studyblue.com      | CORE-930_AddDepartment_api                         | green     | 13-1-r1dev    | false   | 2017-12-14T17:42:41.000Z  |
-| devstack-web-krakatoa.dev.ec2.studyblue.com     | Core-1050_ColorChangesProAwareness                 | green     | 13-1-r2dev    | True    | 2017-12-15T07:42:27.000Z  |
-| devstack-web-voyager.dev.ec2.studyblue.com      | CORE-996_Limit_HWH_searches                        | red       | 13-1-r7dev    | True    | 2017-12-18T18:30:03.000Z  |
-| devstack-web-melkor.dev.ec2.studyblue.com       | Core-1050_ColorChangesProAwareness                 | green     | 13-1-r2dev    | True    | 2017-12-20T00:32:23.000Z  |
-| devstack-web-kasthurim.dev.ec2.studyblue.com    | TS-5-tbs-introduction-screen                       | red       | 13-1-r2dev    | false   | 2017-12-20T00:32:26.000Z  |
-| devstack-web-riviere.dev.ec2.studyblue.com      | CORE-829_lihpStylingChanges                        | green     | 13-1-r3dev    | false   | 2017-12-20T18:36:12.000Z  |
-| devstack-web-chewbacca.dev.ec2.studyblue.com    | Core-1034_StarringCardsCosmeticChanges             | green     | 13-1-r1dev    | True    | 2017-12-20T22:42:09.000Z  |
-| devstack-web-hermione.dev.ec2.studyblue.com     | CORE-996_Limit_HWH_searches                        | green     | 13-1-r18dev   | false   | 2017-12-21T01:35:57.000Z  |
-| devstack-web-galatea.dev.ec2.studyblue.com      | SUM-373_Update_UX_Pagination                       | red       | 13-1-r1dev    | True    | 2017-12-21T06:36:57.000Z  |
-| devstack-web-defiant.dev.ec2.studyblue.com      | SUM-786_remove-date-link                           | green     | 13-1-r1dev    | True    | 2017-12-21T06:55:40.000Z  |
-| devstack-web-trenzalore.dev.ec2.studyblue.com   | CORE-1053_ChapterFinder                            | red       | 13-1-r2dev    | True    | 2017-12-21T18:23:49.000Z  |
-| devstack-web-jarjar.dev.ec2.studyblue.com       | texsol                                             | green     | 13-1-r16dev   | True    | 2017-12-21T19:05:33.000Z  |
-| devstack-web-tardis.dev.ec2.studyblue.com       | CORE-829_lihpStylingChanges                        | green     | 13-1-r1dev    | True    | 2017-12-21T19:24:24.000Z  |
-| devstack-web-dory.dev.ec2.studyblue.com         | CORE-804_email-verification                        | green     | 13-1-r4dev    | True    | 2017-12-21T21:07:40.000Z  |
-| devstack-web-firefly.dev.ec2.studyblue.com      | CORE-939_Textbook_Onboarding_SeoDeck               | green     | 13-1-r6dev    | True    | 2017-12-21T21:24:58.000Z  |
-| devstack-web-rhea.dev.ec2.studyblue.com         | SUM-713_class-professor-deep-link                  | green     | 13-1-r1dev    | True    | 2017-12-21T21:49:09.000Z  |
-| devstack-web-devi.dev.ec2.studyblue.com         | SUM-767_Update_queries_SEO_pages                   | red       | 13-1-r4dev    | True    | 2017-12-21T22:31:34.000Z  |
-| devstack-web-mantastic.dev.ec2.studyblue.com    | IOS-4830-Recommended-materials-class-and-homepage  | green     | 13-1-r1dev    | True    | 2017-12-21T22:32:20.000Z  |
-| devstack-web-optimus.dev.ec2.studyblue.com      | CORE-804_email-verification                        | green     | 13-1-r2dev    | True    | 2017-12-21T23:23:40.000Z  |
-| devstack-web-hood.dev.ec2.studyblue.com         | CORE-885-masonry-load-flowed-redo                  | green     | 13-1-r3dev    | false   | 2017-12-21T23:47:20.000Z  |
-| devstack-web-dianaprince.dev.ec2.studyblue.com  | CORE-804_email-verification                        | green     | 13-1-r1dev    | True    | 2017-12-21T23:54:40.000Z  |
-| devstack-web-direwolf.dev.ec2.studyblue.com     | CORE-804_email-verification                        | green     | 13-1-r1dev    | false   | 2017-12-22T01:37:08.000Z  |
-| devstack-web-mobile.dev.ec2.studyblue.com       | develop                                            | green     | 13-1-r191dev  | false   | 2017-12-22T13:13:34.000Z  |
-| devstack-web-develop.dev.ec2.studyblue.com      | develop                                            | green     | 13-1-r268dev  | True    | 2017-12-22T18:16:07.000Z  |
-| devstack-web-hogwarts.dev.ec2.studyblue.com     | develop                                            | green     | 13-1-r20dev   | True    | 2017-12-22T18:57:08.000Z  |
-+-------------------------------------------------+----------------------------------------------------+-----------+---------------+---------+---------------------------+
++-------+-------------------------------------------------+-----------------+---------+----------------------------------------------------+-----------+---------------+---------------------------+
+| Index | Name                                            | Priv_ip         | Bigdata | Branch                                             | Es_status | Rev           | Launch_time               |
++-------+-------------------------------------------------+-----------------+---------+----------------------------------------------------+-----------+---------------+---------------------------+
+| 1     | devstack-web-arya.dev.ec2.studyblue.com         | 172.16.105.212  | false   | www-arya                                           | green     | 13-1-r3dev    | 2017-08-02T19:42:43.000Z  |
+| 2     | devstack-web-nymeria.dev.ec2.studyblue.com      | 10.0.0.77       | True    | release-12.41.11                                   | green     | 12-41-r10dev  | 2017-10-24T18:10:30.000Z  |
+| 3     | devstack-web-excelsior.dev.ec2.studyblue.com    | 10.0.4.111      | false   | develop                                            | green     | 13-1-r1dev    | 2017-11-14T18:39:59.000Z  |
+| 4     | devstack-web-antares.dev.ec2.studyblue.com      | 10.0.4.11       | false   | develop                                            | green     | 13-1-r1dev    | 2017-11-14T18:44:15.000Z  |
+| 5     | devstack-web-ajax.dev.ec2.studyblue.com         | 10.0.4.213      | false   | develop                                            | green     | 13-1-r1dev    | 2017-11-14T18:47:12.000Z  |
+| 6     | devstack-web-titan.dev.ec2.studyblue.com        | 10.0.4.221      | false   | develop                                            | green     | 13-1-r53dev   | 2017-11-29T00:20:05.000Z  |
+| 7     | devstack-web-riker.dev.ec2.studyblue.com        | 10.0.4.66       | True    | CORE-772                                           | green     | 13-1-r5dev    | 2017-12-05T17:14:57.000Z  |
+| 8     | devstack-web-enterprise.dev.ec2.studyblue.com   | 10.0.4.131      | True    | IOS-4830-Recommended-materials-class-and-homepage  | green     | 13-1-r1dev    | 2017-12-07T20:27:01.000Z  |
+| 9     | devstack-web-tyrion.dev.ec2.studyblue.com       | 10.0.4.109      | True    | SUM-373_Update_UX_Pagination                       | green     | 13-1-r2dev    | 2017-12-11T20:24:13.000Z  |
+| 10    | devstack-web-ludo.dev.ec2.studyblue.com         | 10.0.4.149      | false   | CORE-940_TextbookInOnboarding                      | green     | 13-1-r1dev    | 2017-12-11T23:51:25.000Z  |
+| 11    | devstack-web-yoda.dev.ec2.studyblue.com         | 10.0.4.103      | True    | ts-15                                              | green     | 13-1-r1dev    | 2017-12-12T22:51:21.000Z  |
+| 12    | devstack-web-ashitaka.dev.ec2.studyblue.com     | 10.0.4.101      | false   | CORE-1032-land-on-deck                             | red       | 13-1-r5dev    | 2017-12-14T00:58:03.000Z  |
+| 13    | devstack-web-rakibul.dev.ec2.studyblue.com      | 172.16.105.243  | false   | CORE-930_AddDepartment_api                         | green     | 13-1-r1dev    | 2017-12-14T17:42:41.000Z  |
+| 14    | devstack-web-krakatoa.dev.ec2.studyblue.com     | 10.0.4.125      | True    | Core-1050_ColorChangesProAwareness                 | green     | 13-1-r2dev    | 2017-12-15T07:42:27.000Z  |
+| 15    | devstack-web-voyager.dev.ec2.studyblue.com      | 10.0.4.107      | True    | CORE-996_Limit_HWH_searches                        | red       | 13-1-r7dev    | 2017-12-18T18:30:03.000Z  |
+| 16    | devstack-web-melkor.dev.ec2.studyblue.com       | 10.0.4.182      | True    | Core-1050_ColorChangesProAwareness                 | green     | 13-1-r2dev    | 2017-12-20T00:32:23.000Z  |
+| 17    | devstack-web-kasthurim.dev.ec2.studyblue.com    | 10.0.4.237      | false   | TS-5-tbs-introduction-screen                       | red       | 13-1-r2dev    | 2017-12-20T00:32:26.000Z  |
+| 18    | devstack-web-riviere.dev.ec2.studyblue.com      | 10.0.4.171      | false   | CORE-829_lihpStylingChanges                        | green     | 13-1-r3dev    | 2017-12-20T18:36:12.000Z  |
+| 19    | devstack-web-chewbacca.dev.ec2.studyblue.com    | 10.0.4.133      | True    | Core-1034_StarringCardsCosmeticChanges             | green     | 13-1-r1dev    | 2017-12-20T22:42:09.000Z  |
+| 20    | devstack-web-hermione.dev.ec2.studyblue.com     | 10.0.4.37       | false   | CORE-996_Limit_HWH_searches                        | green     | 13-1-r18dev   | 2017-12-21T01:35:57.000Z  |
+| 21    | devstack-web-galatea.dev.ec2.studyblue.com      | 10.0.4.4        | True    | SUM-373_Update_UX_Pagination                       | red       | 13-1-r1dev    | 2017-12-21T06:36:57.000Z  |
+| 22    | devstack-web-defiant.dev.ec2.studyblue.com      | 10.0.4.217      | True    | SUM-786_remove-date-link                           | green     | 13-1-r1dev    | 2017-12-21T06:55:40.000Z  |
+| 23    | devstack-web-trenzalore.dev.ec2.studyblue.com   | 10.0.4.25       | True    | CORE-1053_ChapterFinder                            | red       | 13-1-r2dev    | 2017-12-21T18:23:49.000Z  |
+| 24    | devstack-web-jarjar.dev.ec2.studyblue.com       | 10.0.4.15       | True    | texsol                                             | green     | 13-1-r16dev   | 2017-12-21T19:05:33.000Z  |
+| 25    | devstack-web-tardis.dev.ec2.studyblue.com       | 10.0.4.59       | True    | CORE-829_lihpStylingChanges                        | green     | 13-1-r1dev    | 2017-12-21T19:24:24.000Z  |
+| 26    | devstack-web-dory.dev.ec2.studyblue.com         | 10.0.4.110      | True    | CORE-804_email-verification                        | green     | 13-1-r4dev    | 2017-12-21T21:07:40.000Z  |
+| 27    | devstack-web-firefly.dev.ec2.studyblue.com      | 10.0.4.130      | True    | CORE-939_Textbook_Onboarding_SeoDeck               | green     | 13-1-r6dev    | 2017-12-21T21:24:58.000Z  |
+| 28    | devstack-web-rhea.dev.ec2.studyblue.com         | 10.0.4.178      | True    | SUM-713_class-professor-deep-link                  | green     | 13-1-r1dev    | 2017-12-21T21:49:09.000Z  |
+| 29    | devstack-web-devi.dev.ec2.studyblue.com         | 10.0.4.204      | True    | SUM-767_Update_queries_SEO_pages                   | red       | 13-1-r4dev    | 2017-12-21T22:31:34.000Z  |
+| 30    | devstack-web-mantastic.dev.ec2.studyblue.com    | 10.0.4.12       | True    | IOS-4830-Recommended-materials-class-and-homepage  | green     | 13-1-r1dev    | 2017-12-21T22:32:20.000Z  |
+| 31    | devstack-web-optimus.dev.ec2.studyblue.com      | 10.0.4.52       | True    | CORE-804_email-verification                        | green     | 13-1-r2dev    | 2017-12-21T23:23:40.000Z  |
+| 32    | devstack-web-hood.dev.ec2.studyblue.com         | 10.0.4.161      | false   | CORE-885-masonry-load-flowed-redo                  | green     | 13-1-r3dev    | 2017-12-21T23:47:20.000Z  |
+| 33    | devstack-web-dianaprince.dev.ec2.studyblue.com  | 10.0.4.244      | True    | CORE-804_email-verification                        | green     | 13-1-r1dev    | 2017-12-21T23:54:40.000Z  |
+| 34    | devstack-web-direwolf.dev.ec2.studyblue.com     | 10.0.4.64       | false   | CORE-804_email-verification                        | green     | 13-1-r1dev    | 2017-12-22T01:37:08.000Z  |
+| 35    | devstack-web-mobile.dev.ec2.studyblue.com       | 172.16.105.196  | false   | develop                                            | green     | 13-1-r191dev  | 2017-12-22T13:13:34.000Z  |
+| 36    | devstack-web-hogwarts.dev.ec2.studyblue.com     | 10.0.4.67       | True    | develop                                            | green     | 13-1-r20dev   | 2017-12-22T18:57:08.000Z  |
+| 37    | devstack-web-develop.dev.ec2.studyblue.com      | 10.0.4.232      | True    | develop                                            | green     | 13-1-r269dev  | 2017-12-22T20:16:05.000Z  |
++-------+-------------------------------------------------+-----------------+---------+----------------------------------------------------+-----------+---------------+---------------------------+
 </code></pre></div></div>
 <p>Finally, you can also combine things together:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony mongo size=t2.small env=production
