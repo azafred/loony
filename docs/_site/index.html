@@ -1,69 +1,104 @@
----
-layout: default
----
-Welcome to Loony's homepage.
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
 
-Loony is a command line tool designed to help you find instances and potentially connect to them.
+<!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>[“Loony”] | [“A smarter tool to find things in aws”]</title>
+<meta property="og:title" content="[“Loony”]" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[“A smarter tool to find things in aws”]" />
+<meta property="og:description" content="[“A smarter tool to find things in aws”]" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="[“Loony”]" />
+<script type="application/ld+json">
+{"name":"[“Loony”]","description":"[“A smarter tool to find things in aws”]","author":null,"@type":"WebSite","url":"http://localhost:4000/","publisher":null,"image":null,"headline":"[“Loony”]","dateModified":null,"datePublished":null,"sameAs":null,"mainEntityOfPage":null,"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
 
-The tool was (badly) written in python, and is hosted on github (See links above) 
-<HR>
-# Requirements:
-If you are using the binary version, there are no other requirements. However, the best experience will be had if you are using iterm and have tmux installed (```brew install tmux```)
+  </head>
 
-If you are using the python version (from source, or from pip), you will need to have python 2.7 installed, as well as all the packages listed in the requires.txt file (```pip install -r requirements.txt```)
+  <body>
 
-<HR>
-# Installation:
-## Binaries:
-Binaries for both MacOS and Linux are hosted on S3. 
+    <header>
+      <div class="container">
+        <h1>Loony</h1>
+        <h2>A smarter tool to find things in aws</h2>
 
-To install the binaries, simply run the following command: 
+        <section id="downloads">
+          
+            <a href="" class="btn">Download as .zip</a>
+            <a href="" class="btn">Download as .tar.gz</a>
+          
+          <a href="" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-On a mac:
-```bash
-$> wget https://s3.amazonaws.com/studyblue-binaries/loony_macos_latest -O /usr/local/bin/loony && chmod 755 $_
-```
+    <div class="container">
+      <section id="main_content">
+        <p>Welcome to Loony’s homepage.</p>
 
-On Linux:
-```bash
-$> wget https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest -O /usr/local/bin/loony && chmod 755 $_
-```
+<p>Loony is a command line tool designed to help you find instances and potentially connect to them.</p>
 
-Of course, for this to work, you will also have to make sure ```/usr/local/bin``` is in your path.
+<p>The tool was (badly) written in python, and is hosted on github (See links above)</p>
+<hr />
 
-Additionally, it would be usefull to setup a few aliases. For simplicity's sake, here is what I would suggest:
-```bash
-PATH=$PATH:/usr/local/bin
-alias l='loony'
-alias c='loony -c'
-```
-## Pip:
-pip is the standard way of distributing python modules. Sadly, it is not always easy to get to work. However, it will be more integrated in the python ecosystem, should you ever want to import loony or some of its parts into your own project.
+<h1 id="requirements">Requirements:</h1>
+<p>If you are using the binary version, there are no other requirements. However, the best experience will be had if you are using iterm and have tmux installed (<code class="highlighter-rouge">brew install tmux</code>)</p>
 
-Simply run the following to install in your main python distribution. You can of course customize this to work with virtualenv... I'll leave this exercise to the reader... 
+<p>If you are using the python version (from source, or from pip), you will need to have python 2.7 installed, as well as all the packages listed in the requires.txt file (<code class="highlighter-rouge">pip install -r requirements.txt</code>)</p>
 
-```bash
-$> sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
-```
+<hr />
 
-This command will automatically install ```/usr/local/bin/loony``` and ```/usr/local/bin/connect```. 
-## Source:
-Finally, you can checkout the source repo and install loony from it:
+<h1 id="installation">Installation:</h1>
+<h2 id="binaries">Binaries:</h2>
+<p>Binaries for both MacOS and Linux are hosted on S3.</p>
 
-```bash
-$> git clone git@github.com:StudyBlue/loony.git
-$> cd loony
-$> python setup.py install
-```
-This commands will automatically install ```/usr/local/bin/loony``` and ```/usr/local/bin/connect```. 
-<HR>
+<p>To install the binaries, simply run the following command:</p>
 
-# Setup:
+<p>On a mac:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> wget https://s3.amazonaws.com/studyblue-binaries/loony_macos_latest <span class="nt">-O</span> /usr/local/bin/loony <span class="o">&amp;&amp;</span> chmod 755 <span class="nv">$_</span>
+</code></pre></div></div>
 
-In order to work ```~/.aws/credentials``` needs to be setup. This is the same file that aws-cli and boto use. It should look
-similar to this:
-```
-    [default]
+<p>On Linux:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> wget https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest <span class="nt">-O</span> /usr/local/bin/loony <span class="o">&amp;&amp;</span> chmod 755 <span class="nv">$_</span>
+</code></pre></div></div>
+
+<p>Of course, for this to work, you will also have to make sure <code class="highlighter-rouge">/usr/local/bin</code> is in your path.</p>
+
+<p>Additionally, it would be usefull to setup a few aliases. For simplicity’s sake, here is what I would suggest:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/bin
+<span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="s1">'loony'</span>
+<span class="nb">alias </span><span class="nv">c</span><span class="o">=</span><span class="s1">'loony -c'</span>
+</code></pre></div></div>
+<h2 id="pip">Pip:</h2>
+<p>pip is the standard way of distributing python modules. Sadly, it is not always easy to get to work. However, it will be more integrated in the python ecosystem, should you ever want to import loony or some of its parts into your own project.</p>
+
+<p>Simply run the following to install in your main python distribution. You can of course customize this to work with virtualenv… I’ll leave this exercise to the reader…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> <span class="nb">sudo </span>pip install git+ssh://git@github.com/StudyBlue/loony.git
+</code></pre></div></div>
+
+<p>This command will automatically install <code class="highlighter-rouge">/usr/local/bin/loony</code> and <code class="highlighter-rouge">/usr/local/bin/connect</code>.</p>
+<h2 id="source">Source:</h2>
+<p>Finally, you can checkout the source repo and install loony from it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> git clone git@github.com:StudyBlue/loony.git
+<span class="nv">$&gt;</span> <span class="nb">cd </span>loony
+<span class="nv">$&gt;</span> python setup.py install
+</code></pre></div></div>
+<p>This commands will automatically install <code class="highlighter-rouge">/usr/local/bin/loony</code> and <code class="highlighter-rouge">/usr/local/bin/connect</code>.</p>
+<hr />
+
+<h1 id="setup">Setup:</h1>
+
+<p>In order to work <code class="highlighter-rouge">~/.aws/credentials</code> needs to be setup. This is the same file that aws-cli and boto use. It should look
+similar to this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    [default]
     region = us-east-1
     aws_access_key_id = blahblah
     aws_secret_access_key = blahblah
@@ -74,14 +109,13 @@ similar to this:
     aws_access_key_id = blahblah
     aws_secret_access_key = blahblah
     output = text
-```
-I usually set [default] the same way as [prod]
+</code></pre></div></div>
+<p>I usually set [default] the same way as [prod]</p>
 
-<HR>
+<hr />
 
-# Usage:
-```
-usage: loony [-h] [-v] [-d] [--short] [--long] [-nc] [-k] [--version]
+<h1 id="usage">Usage:</h1>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: loony [-h] [-v] [-d] [--short] [--long] [-nc] [-k] [--version]
           [-o [OUTPUT]] [-u [USER]] [-c] [-p] [-b] [-nt] [-1] [--cmd [CMD]]
           [-or [orsearch [orsearch ...]]] [--upgrade]
           [search [search ...]]
@@ -113,15 +147,14 @@ optional arguments:
   -or [orsearch [orsearch ...]], --or [orsearch [orsearch ...]]
                         things to or in a search
   --upgrade             upgrade Loony
-```
+</code></pre></div></div>
 
-<HR>
+<hr />
 
-# Examples:
-In its simplest form, loony will simply return all the hosts running in AWS:
+<h1 id="examples">Examples:</h1>
+<p>In its simplest form, loony will simply return all the hosts running in AWS:</p>
 
-```
-#> loony
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony
 Please wait while I rebuild the cache...
 +-------+------------------------------------------------------+---------------------+----------------+------------+--------------------------+---------------------------------------------------------------------------------------------------------+
 | Index | Name                                                 | Id                  | Priv_ip        | Size       | Launch_time              | Tags_txt                                                                                                |
@@ -135,10 +168,9 @@ Please wait while I rebuild the cache...
 | 7     | es-6.prod.ec2.studyblue.com                          | i-0bb8c5320c5e8f8e6 | 172.16.63.212  | r4.2xlarge | 2017-03-23T23:00:44.000Z | Role='elasticsearch', Env='production'                                                                  |
 | 8     | generic-server.prod.ec2.studyblue.com                | i-00de213c6ee539f3f | 172.16.63.231  | t2.medium  | 2017-01-17T19:38:10.000Z | Role='generic-server', Env='production'                                                                 |
 | 9     | kibana-prod.prod.ec2.studyblue.com                   | i-05cab15eb13de7f1d | 172.16.63.132  | m4.large   | 2017-03-30T21:03:08.000Z | Role='kibana', Env='production'                                                                         |
-```
-Alternatively, you can search for any parameter in a fuzzy-match fashion:
-```
-#> loony mongoc
+</code></pre></div></div>
+<p>Alternatively, you can search for any parameter in a fuzzy-match fashion:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony mongoc
 Searching for ['mongoc']
 +-------+---------------------------------+---------------------+---------------+-----------+--------------------------+----------------------------------+
 | Index | Name                            | Id                  | Priv_ip       | Size      | Launch_time              | Tags_txt                         |
@@ -150,15 +182,14 @@ Searching for ['mongoc']
 | 5     | c01.mongo.dev.ec2.studyblue.com | i-091826d699b1eaa2c | 10.0.4.238    | t2.medium | 2017-03-12T19:46:22.000Z | Role='mongoc', Env='development' |
 | 6     | c02.mongo.dev.ec2.studyblue.com | i-0dec7789c46be02f5 | 10.0.4.109    | t2.medium | 2017-03-12T19:46:22.000Z | Role='mongoc', Env='development' |
 +-------+---------------------------------+---------------------+---------------+-----------+--------------------------+----------------------------------+
-```
+</code></pre></div></div>
 
-You can also search by keys for a more refined output:
-```
-#> loony --keys
+<p>You can also search by keys for a more refined output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony --keys
 The following keys are available:
 as_group_name, cfn_logical_id, cfn_stack_id, cfn_stack_name, env, id, launch_time, location, master, monitored, name, priv_dns, priv_ip, pub_dns, pub_ip, role, size, status, subnet_id, tags, tags_txt, vpc_id
 
-#> loony master=true
+#&gt; loony master=true
 Searching for ['master=true']
 +-------+--------------------------------+---------------------+---------------+-----------+--------------------------+------------------------------------------------+
 | Index | Name                           | Id                  | Priv_ip       | Size      | Launch_time              | Tags_txt                                       |
@@ -166,19 +197,18 @@ Searching for ['master=true']
 | 1     | m12.s04.prod.ec2.studyblue.com | i-0329996a5f1c2b7f7 | 172.16.25.142 | r3.xlarge | 2017-02-03T03:08:24.000Z | master='true', Role='mongod', Env='production' |
 +-------+--------------------------------+---------------------+---------------+-----------+--------------------------+------------------------------------------------+
 
-#> loony loony cfn_stack_name=mongo-prod-m12-s04
+#&gt; loony loony cfn_stack_name=mongo-prod-m12-s04
 Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 +-------+--------------------------------+---------------------+---------------+-----------+--------------------------+------------------------------------------------+
 | Index | Name                           | Id                  | Priv_ip       | Size      | Launch_time              | Tags_txt                                       |
 +-------+--------------------------------+---------------------+---------------+-----------+--------------------------+------------------------------------------------+
 | 1     | m12.s04.prod.ec2.studyblue.com | i-0329996a5f1c2b7f7 | 172.16.25.142 | r3.xlarge | 2017-02-03T03:08:24.000Z | master='true', Role='mongod', Env='production' |
 +-------+--------------------------------+---------------------+---------------+-----------+--------------------------+------------------------------------------------+
-```
+</code></pre></div></div>
 
-You get the idea....
-now how about the output? Well, fear not, it is customizable. There are a few builtins: --short and --long:
-```
-#> loony --short cfn_stack_name=mongo-prod-m12-s04
+<p>You get the idea….
+now how about the output? Well, fear not, it is customizable. There are a few builtins: –short and –long:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony --short cfn_stack_name=mongo-prod-m12-s04
 Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 +-------+--------------------------------+---------------+---------+------------------------------------------------+
 | Index | Name                           | Priv_ip       | Status  | Tags_txt                                       |
@@ -186,27 +216,25 @@ Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 | 1     | m12.s04.prod.ec2.studyblue.com | 172.16.25.142 | running | master='true', Role='mongod', Env='production' |
 +-------+--------------------------------+---------------+---------+------------------------------------------------+
 
-#> loony --long cfn_stack_name=mongo-prod-m12-s04
+#&gt; loony --long cfn_stack_name=mongo-prod-m12-s04
 Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 +-------+--------------------------------+---------------------+---------------+--------+--------------+-----------------+-----------+------------+---------+-----------+--------------------------+------------+--------+--------+--------------------+
 | Index | Name                           | Id                  | Priv_ip       | Pub_ip | Vpc_id       | Subnet_id       | Size      | Location   | Status  | Monitored | Launch_time              | Env        | Role   | Master | Cfn_stack_name     |
 +-------+--------------------------------+---------------------+---------------+--------+--------------+-----------------+-----------+------------+---------+-----------+--------------------------+------------+--------+--------+--------------------+
 | 1     | m12.s04.prod.ec2.studyblue.com | i-0329996a5f1c2b7f7 | 172.16.25.142 |        | vpc-55c3dc30 | subnet-9ce4fba6 | r3.xlarge | us-east-1e | running | True      | 2017-02-03T03:08:24.000Z | production | mongod | true   | mongo-prod-m12-s04 |
 +-------+--------------------------------+---------------------+---------------+--------+--------------+-----------------+-----------+------------+---------+-----------+--------------------------+------------+--------+--------+--------------------+
-```
-You can of course also customize the output, using the same keys listed above:
-```
-#> loony -o name,priv_ip cfn_stack_name=mongo-prod-m12-s04
+</code></pre></div></div>
+<p>You can of course also customize the output, using the same keys listed above:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony -o name,priv_ip cfn_stack_name=mongo-prod-m12-s04
 Searching for ['cfn_stack_name=mongo-prod-m12-s04']
 +--------------------------------+---------------+
 | Name                           | Priv_ip       |
 +--------------------------------+---------------+
 | m12.s04.prod.ec2.studyblue.com | 172.16.25.142 |
 +--------------------------------+---------------+
-```
-You can also get details on devstacks with the following handy dandy one:
-```
-loony devstack -o name,branch,es_status,rev,bigdata,launch_time
+</code></pre></div></div>
+<p>You can also get details on devstacks with the following handy dandy one:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loony devstack -o name,branch,es_status,rev,bigdata,launch_time
 Searching for ['devstack']
 Cache set to expire on 2017-12-23 11:57:00.113042
 Checking for changes...
@@ -252,10 +280,9 @@ No changes detected. Using cache.
 | devstack-web-develop.dev.ec2.studyblue.com      | develop                                            | green     | 13-1-r268dev  | True    | 2017-12-22T18:16:07.000Z  |
 | devstack-web-hogwarts.dev.ec2.studyblue.com     | develop                                            | green     | 13-1-r20dev   | True    | 2017-12-22T18:57:08.000Z  |
 +-------------------------------------------------+----------------------------------------------------+-----------+---------------+---------+---------------------------+
-```
-Finally, you can also combine things together:
-```
-#> loony mongo size=t2.small env=production
+</code></pre></div></div>
+<p>Finally, you can also combine things together:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony mongo size=t2.small env=production
 Searching for ['mongo', 'size=t2.small', 'env=production']
 +-------+--------------------------------+---------------------+---------------+----------+--------------------------+---------------------------------+
 | Index | Name                           | Id                  | Priv_ip       | Size     | Launch_time              | Tags_txt                        |
@@ -265,17 +292,16 @@ Searching for ['mongo', 'size=t2.small', 'env=production']
 | 3     | m01.s01.prod.ec2.studyblue.com | i-0f57bbb64c4daf721 | 172.16.25.88  | t2.small | 2017-01-04T04:59:40.000Z | Role='mongoa', Env='production' |
 | 4     | m02.s02.prod.ec2.studyblue.com | i-0d672e48d49a264d3 | 172.16.25.217 | t2.small | 2017-01-04T04:59:39.000Z | Role='mongoa', Env='production' |
 +-------+--------------------------------+---------------------+---------------+----------+--------------------------+---------------------------------+
-```
-## THAT's NOT ALL!
+</code></pre></div></div>
+<h2 id="thats-not-all">THAT’s NOT ALL!</h2>
 
-Loony will also allow you to connect to the hosts it finds!
+<p>Loony will also allow you to connect to the hosts it finds!
 If there is only one result, it will ssh directly to it.
-If there are more than 1 results, it will use tmux to connect to all the results, creating new virtual 'pages' in tmux parlance
-depending on the number of servers to connect to.
+If there are more than 1 results, it will use tmux to connect to all the results, creating new virtual ‘pages’ in tmux parlance
+depending on the number of servers to connect to.</p>
 
-To access this wonderful featuer, simply add -c to your loony command, or use the connect alias:
-```
-#> connect jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com
+<p>To access this wonderful featuer, simply add -c to your loony command, or use the connect alias:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; connect jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com
 Searching for ['jobserver-i-0b4b509cd8e988144.prod.ec2.studyblue.com']
 +-------+------------------------------------------------------+---------------------+---------------+----------+--------------------------+------------------------------------+
 | Index | Name                                                 | Id                  | Priv_ip       | Size     | Launch_time              | Tags_txt                           |
@@ -293,10 +319,9 @@ Last login: Mon Apr  3 09:52:06 2017 from 192.168.150.144
 
 https://aws.amazon.com/amazon-linux-ami/2016.09-release-notes/
 [fred@jobserver-i-0b4b509cd8e988144 ~]$
-```
-And for more than one server:
-```
-#> loony -c jobserver env=production
+</code></pre></div></div>
+<p>And for more than one server:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony -c jobserver env=production
 fatal: No names found, cannot describe anything.
 Searching for ['jobserver', 'env=production']
 +-------+------------------------------------------------------+---------------------+---------------+----------+--------------------------+------------------------------------+
@@ -310,20 +335,24 @@ Searching for ['jobserver', 'env=production']
 | 6     | jobserver-i-080d1ed6835388eb0.prod.ec2.studyblue.com | i-080d1ed6835388eb0 | 172.16.61.240 | m4.large | 2017-03-31T20:58:35.000Z | Role='jobserver', Env='production' |
 +-------+------------------------------------------------------+---------------------+---------------+----------+--------------------------+------------------------------------+
 choices of 6 instances
-```
+</code></pre></div></div>
 
-![Helpful screenshot]({{ "/assets/tmux.png" | absolute_url }})
+<p><img src="http://localhost:4000/assets/tmux.png" alt="Helpful screenshot" /></p>
+
+<p>Also you can run a command on all the server instances that are returned</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony --cmd 'ps auxw | grep tomcat' role=webapp env=production
+</code></pre></div></div>
+<p>If you want to run commands serially on a multitude of servers without using tmux (ie: non-interactively):</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#&gt; loony --cmd 'ps auxw | grep tomcat' -b role=webapp env=production
+</code></pre></div></div>
+<p><strong>NOTE:</strong> if you pass ‘logs’ as the command, it will start tailing logs, based on list of dict defined in connect.py and/or system logs.</p>
+
+<hr />
 
 
-Also you can run a command on all the server instances that are returned
-```
-#> loony --cmd 'ps auxw | grep tomcat' role=webapp env=production
-```
-If you want to run commands serially on a multitude of servers without using tmux (ie: non-interactively):
-```
-#> loony --cmd 'ps auxw | grep tomcat' -b role=webapp env=production
-```
-**NOTE:** if you pass 'logs' as the command, it will start tailing logs, based on list of dict defined in connect.py and/or system logs.
+      </section>
+    </div>
 
-<HR>
-
+    
+  </body>
+</html>
