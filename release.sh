@@ -30,6 +30,8 @@ if [ -z "$NEEDS_TAG" ]; then
     git tag $NEW_TAG
     pyinstaller loony/main.py --onefile --clean -p ./loony -n loony_${NEW_TAG}_macos --hidden-import=Queue
     docker run -v "$(pwd):/src/" cdrx/pyinstaller-linux:python2 "pyinstaller --onefile --clean -p ./loony -n loony_${NEW_TAG}_linux --hidden-import=Queue loony/main.py"
+    rm dist/loony
+    ln -s loony_${NEW_TAG}_macos dist/loony
     aws s3 cp ./dist/loony_${NEW_TAG}_macos s3://studyblue-binaries/archives/
     aws s3 cp ./dist/loony_${NEW_TAG}_macos s3://studyblue-binaries/loony_macos_latest
     aws s3 cp ./dist/loony_${NEW_TAG}_linux s3://studyblue-binaries/archives/
