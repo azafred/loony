@@ -8,6 +8,7 @@ import sys, os
 import shlex
 import requests
 import os
+import wget
 from subprocess import check_call, call, check_output
 from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
