@@ -79,10 +79,7 @@ def upgrade_loony():
         else:
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest"
         print("Downloading latest version from {}".format(url))
-        response = requests.get(url, stream=True)
-        with open("/usr/local/bin/loony", "wb") as handle:
-            for data in tqdm(response.iter_content()):
-                handle.write(data)
+        wget.download(url, bar=bar_thermometer)
         os.chmod('/usr/local/bin/loony', 755)
 
 

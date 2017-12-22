@@ -6,5 +6,6 @@ prettytable==0.7.2
 PyYAML==3.12
 quik==0.2.2
 tqdm==4.19.5
+wget==3.2
 pyinstaller
 animation
