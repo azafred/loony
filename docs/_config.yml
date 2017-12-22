@@ -1,1 +1,6 @@
-theme: jekyll-theme-time-machine
+theme: jekyll-theme-hacker
+#theme: minima
+title: [Loony]
+description: [A smarter tool to find things in aws]
+show_downloads: true
+github: [metadata]
