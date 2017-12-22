@@ -72,16 +72,18 @@ def upgrade_loony():
         exit_code = check_call(parsed_cmd)
         print(exit_code)
     else:
-        print("\tIt looks like you are running the binary version of loony. Downloading latest from S3.")
+        print("\tIt looks like you are running the binary version of loony.")
         os_version = os.uname()[0]
         if 'Darwin' in os_version:
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_macos_latest"
         else:
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest"
+        print("Downloading latest version from {}".format(url))
         response = requests.get(url, stream=True)
         with open("/usr/local/bin/loony", "wb") as handle:
             for data in tqdm(response.iter_content()):
                 handle.write(data)
+        os.chmod('/usr/local/bin/loony', 755)
 
 
 def connect():
