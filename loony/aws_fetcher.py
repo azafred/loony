@@ -1,6 +1,5 @@
 ﻿import boto.ec2
 from datetime import datetime, timedelta
-import __builtin__
 import animation
 from cache import scached
 from settings import *

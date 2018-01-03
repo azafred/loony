@@ -1,4 +1,3 @@
-import __builtin__
 import re
 from aws_fetcher import aws_inventory
 from display import display_results_ordered

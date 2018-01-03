@@ -3,12 +3,12 @@
 
 import argparse
 import logging
-import __builtin__
 import sys, os
 import shlex
 import requests
 import os
 import wget
+import config
 from subprocess import check_call, call, check_output
 from aws_fetcher import aws_inventory, list_keys
 from display import display_results_ordered
@@ -19,7 +19,6 @@ from settings import *
 from _version import get_versions
 from version import __version__
 from tqdm import tqdm
-
 
 if not os.getenv('PYTHONIOENCODING', None): # PyInstaller workaround
     os.environ['PYTHONIOENCODING'] = 'utf_8'
@@ -157,23 +156,19 @@ def main(connect=False, running_only=True):
         help='Search parameters')
 
     args = parser.parse_args()
-    global verbose
-    __builtin__.verbose = args.verbose
-    __builtin__.debug = args.debug
-    __builtin__.stopped = False
-    __builtin__.running = running_only
-    __builtin__.short = args.short
-    __builtin__.long_format = args.long_format
+    config.short = args.short
+    config.verbose = args.verbose
+    config.debug = args.debug
+    config.long_format = args.long_format
     if args.output:
-        output = args.output.split(',')
-        __builtin__.output = output
+        config.output = args.output.split(',')
     else:
-        __builtin__.output = prefered_output
+        config.output = prefered_output
     search = args.search
     if 'devstack' in search:
-        __builtin__.devstack_format = True
+        config.devstack_format = True
     else:
-        __builtin__.devstack_format = False
+        config.devstack_format = False
     orsearch = args.orsearch
     nocache = args.nocache
     version = args.version

@@ -1,5 +1,5 @@
 import prettytable
-import __builtin__
+import config
 from colorama import Fore, Style
 
 def format_cell(content, max_line_length):
@@ -23,17 +23,17 @@ def format_cell(content, max_line_length):
 
 
 def display_results_ordered(results, notable='', cell_length=100):
-    if __builtin__.short:
+    if config.short:
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
-    elif __builtin__.long_format:
+    elif config.long_format:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
                         'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
-    elif __builtin__.devstack_format:
+    elif config.devstack_format:
         display_columns = ['index', 'name', 'priv_ip', 'bigdata', 'branch', 'es_status', 'rev', 'launch_time']
-    elif not __builtin__.output or __builtin__.output == 'normal':
+    elif not config.output or config.output == 'normal':
         display_columns = ['index', 'name', 'id', 'priv_ip', 'size', 'launch_time', 'tags_txt']
     else:
-        display_columns = __builtin__.output
+        display_columns = config.output
 
 
     t = prettytable.PrettyTable([c.capitalize() for c in display_columns])
