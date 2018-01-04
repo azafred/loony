@@ -20,7 +20,7 @@ def eprint(*args, **kwargs):
 
 def scached(cache_file, expiry):
     def scached_closure(func, *args, **kw):
-        key = md5(':'.join([func.__name__, str(args), str(kw)])).hexdigest()
+        key = md5(':'.join([func.__name__, str(args), str(kw)]).encode('utf-8')).hexdigest()
         d = shelve.open(cache_file)
         changes = False
 

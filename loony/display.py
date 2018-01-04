@@ -23,6 +23,10 @@ def format_cell(content, max_line_length):
 
 
 def display_results_ordered(results, notable='', cell_length=100):
+    try:
+        basestring
+    except NameError:
+        basestring = str
     if config.short:
         display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
     elif config.long_format:

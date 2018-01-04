@@ -64,7 +64,7 @@ def upgrade_loony():
     print("Upgrading Loony. Please wait...")
     cur_file = os.path.realpath(__file__)
     cmd = shlex.split('file {}'.format(cur_file))
-    filetype = check_output(cmd)
+    filetype = check_output(cmd).decode()
     if 'ASCII' in filetype:
         print("\tIt looks like you are using the python source. Upgrading via pip.")
         cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
@@ -181,13 +181,13 @@ def main(connect=False, running_only=True):
     user = args.user
     upgrade = args.upgrade
     public_ip = args.public_ip
-    if upgrade:
-        upgrade_loony()
-        sys.exit(0)
-    elif not check_current():
-        print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
-        upgrade_loony()
-        sys.exit(0)
+    # if upgrade:
+    #     upgrade_loony()
+    #     sys.exit(0)
+    # elif not check_current():
+    #     print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
+    #     upgrade_loony()
+        # sys.exit(0)
     if version:
         show_version()
         sys.exit(0)

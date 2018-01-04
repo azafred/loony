@@ -1,7 +1,7 @@
 from __future__ import print_function
 from subprocess import call, Popen
-from loony.display import display_results_ordered
-from loony.settings import *
+from display import display_results_ordered
+from settings import *
 from colorama import Fore, Style
 import sys
 import os

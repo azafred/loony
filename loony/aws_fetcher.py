@@ -4,13 +4,13 @@ import animation
 from cache import scached
 from settings import *
 from operator import itemgetter
-#from decorating import animated
+from decorating import animated
 
 ## TODO: Fix this sillyness and merge dicts instead of having to manually add each tag.
 
 @scached(cache_file=cache_file, expiry=timedelta(minutes=cache_lifetime))
-#@animated('Loading data')
-@animation.wait('Loading data')
+@animated('Loading data')
+#@animation.wait('Loading data')
 def aws_inventory():
     instances = []
     index = 1
@@ -77,5 +77,5 @@ def aws_inventory():
 def list_keys():
     instances = aws_inventory()
     keys = sorted(instances[0].keys())
-    print "The following keys are available:"
-    print ", ".join(keys)
+    print("The following keys are available:")
+    print(", ".join(keys))
