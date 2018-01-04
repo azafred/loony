@@ -220,7 +220,7 @@ def main(connect=False, running_only=True):
 
 def show_version():
     # __version__ = get_versions()['version']
-    print( "Loony version %s ").format(__version__)
+    print( "Loony version %s ".format(__version__))
 
 
 if __name__ == '__main__':
