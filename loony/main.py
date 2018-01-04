@@ -206,7 +206,7 @@ def main(connect=False, running_only=True):
             print( "Searching for {} or {}").format(search, orsearch)
             results = searchfor(search, orsearch, notable=notable)
         else:
-            print( "Searching for %s" )% search
+            print( "Searching for {}".format(search))
             results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:

@@ -29,7 +29,7 @@ def scached(cache_file, expiry):
             if key in d:
                 if d[key].get('expires_on', datetime.datetime.now()) < datetime.datetime.now():
                     del d[key]
-                eprint("Cache set to expire on %s" % d[key]['expires_on'])
+                eprint("Cache set to expire on {}".format(d[key]['expires_on']))
                 eprint("Checking for changes...")
                 dt_earlier = d[key]['expires_on'] - expiry
                 earlier = time.mktime(dt_earlier.timetuple())
@@ -42,7 +42,7 @@ def scached(cache_file, expiry):
                 for ev in events:
                     ts = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ev['EventTime']))
                     if 'ami' in ev['Resources'][0]['ResourceName']:
-                        eprint(" !! Change detected: Instance: %s updated at %s" % (ev['Resources'][0]['ResourceName'], ts))
+                        eprint(" !! Change detected: Instance: {} updated at {}".format(ev['Resources'][0]['ResourceName'], ts)))
                         changes = True
                 if not changes:
                     eprint("No changes detected. Using cache.")
@@ -71,4 +71,4 @@ def expire_cache(cache_file=cache_file):
         eprint("Cache removed.")
     except:
         eprint("Something happened and I was not able to remove the cache file.")
-        eprint("Please remove %s manually" % cache_file)
+        eprint("Please remove {} manually".format(cache_file))
