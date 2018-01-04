@@ -52,7 +52,7 @@ def check_aws_creds():
 def check_current():
     url = "https://s3.amazonaws.com/studyblue-binaries/latest_version.txt"
     r = requests.get(url)
-    latest = r.content.rstrip()
+    latest = r.content.rstrip().decode()
     if latest == __version__:
         #current
         return True
@@ -184,10 +184,10 @@ def main(connect=False, running_only=True):
     if upgrade:
         upgrade_loony()
         sys.exit(0)
-    # elif not check_current():
-    #     print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
-    #     upgrade_loony()
-    #     sys.exit(0)
+    elif not check_current():
+        print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
+        upgrade_loony()
+        sys.exit(0)
     if version:
         show_version()
         sys.exit(0)
@@ -220,7 +220,7 @@ def main(connect=False, running_only=True):
 
 def show_version():
     # __version__ = get_versions()['version']
-    print( "Loony version %s ") % __version__
+    print( "Loony version %s ").format(__version__)
 
 
 if __name__ == '__main__':
