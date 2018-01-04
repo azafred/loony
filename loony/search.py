@@ -1,6 +1,6 @@
 import re
-from loony.aws_fetcher import aws_inventory
-from loony.display import display_results_ordered
+from aws_fetcher import aws_inventory
+from display import display_results_ordered
 from pprint import pprint
 from operator import itemgetter
 

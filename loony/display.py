@@ -1,5 +1,5 @@
 import prettytable
-import loony.config
+import config
 from colorama import Fore, Style
 
 def format_cell(content, max_line_length):
