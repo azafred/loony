@@ -1,7 +1,7 @@
 ﻿import boto.ec2
 from datetime import datetime, timedelta
 import animation
-from .cache import scached
+from loony.cache import scached
 from settings import *
 from operator import itemgetter
 from decorating import animated

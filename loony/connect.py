@@ -1,6 +1,6 @@
 from __future__ import print_function
 from subprocess import call, Popen
-from .display import display_results_ordered
+from loony.display import display_results_ordered
 from settings import *
 from colorama import Fore, Style
 import sys
