@@ -184,10 +184,10 @@ def main(connect=False, running_only=True):
     if upgrade:
         upgrade_loony()
         sys.exit(0)
-    elif not check_current():
-        print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
-        upgrade_loony()
-        sys.exit(0)
+    # elif not check_current():
+    #     print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
+    #     upgrade_loony()
+    #     sys.exit(0)
     if version:
         show_version()
         sys.exit(0)
