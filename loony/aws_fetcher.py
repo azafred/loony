@@ -50,24 +50,25 @@ def aws_inventory():
                     other_tags[key] = str(val)
             tags_txt = ', '.join("{!s}={!r}".format(key, val) for (key, val) in sorted(other_tags.items()))
             monitored = inst.monitored
-            instances.append({'id': id, 'name': name, 'location': location,
-                                'size': size,
-                                'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
-                                'priv_dns': priv_dns,
-                                'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
-                                'monitored': monitored, 'tags': dict(inst.tags), 'tags_txt': tags_txt,
-                                'env': env, 'role': role, 'master': master,
-                                'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
-                                'cfn_stack_name': cfn_stack_name,
-                                'as_group_name': as_group_name,
-                                'launch_time': launch_time,
-                                'es_cluster': es_cluster,
-                                'es_status': es_status,
-                                'bigdata': bigdata,
-                                'branch': branch,
-                                'rev': rev,
-                                'active_link': active_link,
-                                'num_links_connected': num_links_connected})
+            if inst.state in 'running':
+                instances.append({'id': id, 'name': name, 'location': location,
+                                    'size': size,
+                                    'pub_ip': public_ip, 'priv_ip': private_ip, 'pub_dns': pub_dns,
+                                    'priv_dns': priv_dns,
+                                    'status': inst.state, 'vpc_id': vpc_id, 'subnet_id': subnet_id,
+                                    'monitored': monitored, 'tags': dict(inst.tags), 'tags_txt': tags_txt,
+                                    'env': env, 'role': role, 'master': master,
+                                    'cfn_logical_id': cfn_logical_id, 'cfn_stack_id': cfn_stack_id,
+                                    'cfn_stack_name': cfn_stack_name,
+                                    'as_group_name': as_group_name,
+                                    'launch_time': launch_time,
+                                    'es_cluster': es_cluster,
+                                    'es_status': es_status,
+                                    'bigdata': bigdata,
+                                    'branch': branch,
+                                    'rev': rev,
+                                    'active_link': active_link,
+                                    'num_links_connected': num_links_connected})
     sorted_instances = sorted(instances, key=itemgetter('env', 'role', 'launch_time'))
     for s in sorted_instances:
         s['index'] = index

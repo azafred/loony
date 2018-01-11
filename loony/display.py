@@ -54,8 +54,10 @@ def display_results_ordered(results, notable='', cell_length=100):
             if 'true' in r.get('master', ''):
                 # t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
                 t.add_row([Fore.RED + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
+            elif 'load' in r.get('cfn_stack_name', ''):
+                t.add_row([Fore.GREEN + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
             elif 'test' in r.get('cfn_stack_name', ''):
-                t.add_row([Fore.BLUE + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
+                    t.add_row([Fore.BLUE + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
             else:
                 t.add_row([format_cell(str(r.get(x, "N/A")), cell_length) for x in display_columns])
                 # t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
@@ -63,3 +65,9 @@ def display_results_ordered(results, notable='', cell_length=100):
         print(t.get_string(border=False, padding_width=1, header=False))
     else:
         print(t)
+        u = prettytable.PrettyTable(["color", "meaning"], indent=20)
+        u.align = 'l'
+        u.add_row([Fore.RED + "RED" + Style.RESET_ALL, "Cluster Master"])
+        u.add_row([Fore.GREEN + "GREEN" + Style.RESET_ALL, "LoadTest"])
+        u.add_row([Fore.BLUE + "BLUE" + Style.RESET_ALL, "Testing"])
+        print(u)
