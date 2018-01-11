@@ -42,20 +42,23 @@ def display_results_ordered(results, notable='', cell_length=100):
 
     for r in results:
         # tags = str(r['tags'])
-        for x in display_columns:
-            if isinstance(r[x], basestring):
-                if r[x].lower() in ['red', 'false']:
-                    r[x] = Fore.RED + r[x] + Style.RESET_ALL
-                elif r[x].lower() in ['green', 'true']:
-                    r[x] = Fore.GREEN + r[x] + Style.RESET_ALL
-                elif r[x].lower() in ['yellow']:
-                    r[x] = Fore.YELLOW + r[x] + Style.RESET_ALL
-        if 'true' in r.get('master', ''):
-            # t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
-            t.add_row([Fore.RED + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
-        else:
-            t.add_row([format_cell(str(r.get(x, "N/A")), cell_length) for x in display_columns])
-            # t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
+        if r.get('status', '') in 'running':
+            for x in display_columns:
+                if isinstance(r[x], basestring):
+                    if r[x].lower() in ['red', 'false']:
+                        r[x] = Fore.RED + r[x] + Style.RESET_ALL
+                    elif r[x].lower() in ['green', 'true']:
+                        r[x] = Fore.GREEN + r[x] + Style.RESET_ALL
+                    elif r[x].lower() in ['yellow']:
+                        r[x] = Fore.YELLOW + r[x] + Style.RESET_ALL
+            if 'true' in r.get('master', ''):
+                # t.add_row([Fore.RED + format_cell(str(r[x]), cell_length) + Style.RESET_ALL for x in display_columns])
+                t.add_row([Fore.RED + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
+            elif 'test' in r.get('cfn_stack_name', ''):
+                t.add_row([Fore.BLUE + format_cell(str(r.get(x, 'N/A')), cell_length) + Style.RESET_ALL for x in display_columns])
+            else:
+                t.add_row([format_cell(str(r.get(x, "N/A")), cell_length) for x in display_columns])
+                # t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
     if notable:
         print(t.get_string(border=False, padding_width=1, header=False))
     else:
