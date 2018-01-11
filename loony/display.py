@@ -24,7 +24,7 @@ def format_cell(content, max_line_length):
 
 def display_results_ordered(results, notable='', cell_length=100):
     if config.short:
-        display_columns = ['index', 'name', 'priv_ip', 'status', 'tags_txt']
+        display_columns = ['index', 'name', 'priv_ip', 'launch_time', 'tags_txt']
     elif config.long_format:
         display_columns = ['index', 'name', 'id', 'priv_ip', 'pub_ip', 'vpc_id', 'subnet_id', 'size', 'location',
                         'status', 'monitored', 'launch_time', 'env', 'role', 'master', 'cfn_stack_name', 'as_group_name']
