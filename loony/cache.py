@@ -55,20 +55,23 @@ def scached(cache_file, expiry):
                     'data': data,
                 }
 
-            result = d[key]['data']
+            result = d[key].get('data', '')
+            if not result:
+                result = scached(cache_file, expiry)
             d.close()
-
             return result
-        except:
+        except Exception as e:
+            eprint("Debug: Problem with cache: {}".format(str(e)))
             expire_cache(cache_file=cache_file)
-            print("There was a problem with the cache. Please run your command again.")
+            pass
     return decorator.decorator(scached_closure)
+
 
 def expire_cache(cache_file=cache_file):
     try:
         cache_file = cache_file
         os.remove(cache_file)
         eprint("Cache removed.")
-    except:
-        eprint("Something happened and I was not able to remove the cache file.")
-        eprint("Please remove %s manually" % cache_file)
+    except Exception as e:
+        eprint("Debug: Removing cache file: {}".format(str(e)))
+        pass
