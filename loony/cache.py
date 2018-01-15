@@ -21,8 +21,13 @@ def eprint(*args, **kwargs):
 def scached(cache_file, expiry):
     def scached_closure(func, *args, **kw):
         key = md5(':'.join([func.__name__, str(args), str(kw)])).hexdigest()
-        d = shelve.open(cache_file)
-        changes = False
+        try:
+            d = shelve.open(cache_file)
+            changes = False
+        except:
+            expire_cache(cache_file=cache_file)
+            changes = True
+            d = shelve.open(cache_file)
 
         # Expire old data if we have to
         try:
