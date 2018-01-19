@@ -65,7 +65,7 @@ def upgrade_loony():
     cur_file = os.path.realpath(__file__)
     cmd = shlex.split('file {}'.format(cur_file))
     filetype = check_output(cmd)
-    if 'ASCII' in filetype:
+    if 'Python script' in filetype:
         print("\tIt looks like you are using the python source. Upgrading via pip.")
         cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
         parsed_cmd = shlex.split(cmd)
