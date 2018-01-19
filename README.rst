@@ -189,7 +189,6 @@ SETUP
 =====
 In order to work ~/.aws/credentials needs to be setup. This is the same file that aws-cli and boto use. It should look
 similar to this:
-
 ::
     [default]
     region = us-east-1
@@ -252,7 +251,6 @@ ADVANCED STUFF
 
 Creating a binary... You can create a loony binary out of the source code, so that loony can be used on systems with old or no python installed.
 To create the binary, you need pyinstaller (pip).
-
 ::
     #> pyinstaller loony/main.py --onefile --clean -p ./loony -n loony
 

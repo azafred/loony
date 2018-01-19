@@ -67,10 +67,13 @@ def upgrade_loony():
     filetype = check_output(cmd)
     if 'Python script' in filetype:
         print("\tIt looks like you are using the python source. Upgrading via pip.")
-        cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
-        parsed_cmd = shlex.split(cmd)
-        exit_code = check_call(parsed_cmd)
-        print(exit_code)
+        try:
+            cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
+            parsed_cmd = shlex.split(cmd)
+            exit_code = check_call(parsed_cmd)
+            print(exit_code)
+        except Exception as e:
+            print("Problem with pip: {}".format(str(e)))
     else:
         print("\tIt looks like you are running the binary version of loony.")
         os_version = os.uname()[0]
@@ -79,9 +82,11 @@ def upgrade_loony():
         else:
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest"
         print("Downloading latest version from {}".format(url))
-        wget.download(url, out='/usr/local/bin/loony')
-        os.chmod('/usr/local/bin/loony', 755)
-
+        try:
+            wget.download(url, out='/usr/local/bin/loony')
+            os.chmod('/usr/local/bin/loony', 755)
+        except Exception as e:
+            print("Problem with wget: {}".format(str(e)))
 
 def connect():
     main(connect=True, running_only=True)
