@@ -169,7 +169,7 @@ INSTALL
 Installing those scripts is a pip command away!
 This command will do the trick:
 ::
-    #> sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
+    #> sudo pip install loony
 
 
 (don't use sudo if you are in a virtualenv, but the script will then only be available when in that virtualenv...)

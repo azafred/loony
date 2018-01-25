@@ -43,7 +43,7 @@ pip is the standard way of distributing python modules. Sadly, it is not always 
 Simply run the following to install in your main python distribution. You can of course customize this to work with virtualenv... I'll leave this exercise to the reader... 
 
 ```bash
-$> sudo pip install git+ssh://git@github.com/StudyBlue/loony.git
+$> sudo pip install loony
 ```
 
 This command will automatically install ```/usr/local/bin/loony``` and ```/usr/local/bin/connect```. 
