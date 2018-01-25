@@ -96,3 +96,4 @@ dist
 dist/
 dist/loony
 dist/loony
+.pypirc

@@ -3,13 +3,14 @@
 import os
 import subprocess
 from setuptools import setup, find_packages
+from codecs import open
 import versioneer
 import sys
 
-with open('README.rst') as f:
+with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
 
-with open('LICENSE') as f:
+with open('LICENSE', encoding='utf-8') as f:
     license = f.read()
 
 # Fetching version from git tag...
@@ -23,11 +24,11 @@ setup(
     name='loony',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description='Sample package for Python-Guide.org',
+    description='Script to search and connect to EC2 instances.',
     long_description=readme,
     author='Fred Vassard',
-    author_email='azafred@gmail.com',
-    url='https://github.com/azafred/samplemod',
+    author_email='fred@studyblue.com',
+    url='https://github.com/StudyBlue/loony',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'decorating', 'animation', 'wget', 'tqdm'],
@@ -43,6 +44,7 @@ setup(
         'Topic :: Utilities',
         'Programming Language :: Python',
         'Operating System :: MacOS',
+        'Programming Language :: Python :: 2.7'
     ],
 )
 
