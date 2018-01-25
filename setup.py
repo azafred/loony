@@ -34,7 +34,7 @@ setup(
     long_description=readme,
     author='Fred Vassard',
     author_email='fred@studyblue.com',
-    url='https://loony.studyblue.com',
+    url='http://loony.studyblue.com',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'decorating', 'animation', 'wget', 'tqdm'],
