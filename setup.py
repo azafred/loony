@@ -4,8 +4,11 @@ import os
 import subprocess
 from setuptools import setup, find_packages
 from codecs import open
+from loony import version as loonyver
 import versioneer
 import sys
+
+print(loonyver.__version__)
 
 with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
@@ -24,8 +27,9 @@ except:
 
 setup(
     name='loony',
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    #version=versioneer.get_version(),
+    #cmdclass=versioneer.get_cmdclass(),
+    version=loonyver.__version__,
     description='Script to search and connect to EC2 instances.',
     long_description=readme,
     author='Fred Vassard',

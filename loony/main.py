@@ -49,6 +49,7 @@ def check_aws_creds():
         """)
     return creds_ok
 
+
 def check_current():
     url = "https://s3.amazonaws.com/studyblue-binaries/latest_version.txt"
     r = requests.get(url)
@@ -57,6 +58,8 @@ def check_current():
         #current
         return True
     else:
+        print("Current version: {}".format(__version__))
+        print("latest version: {}".format(latest))
         return False
 
 
@@ -88,8 +91,10 @@ def upgrade_loony():
         except Exception as e:
             print("Problem with wget: {}".format(str(e)))
 
+
 def connect():
     main(connect=True, running_only=True)
+
 
 def main(connect=False, running_only=True):
 
@@ -190,9 +195,9 @@ def main(connect=False, running_only=True):
         upgrade_loony()
         sys.exit(0)
     elif not check_current():
-        print("It looks like you are not running the latest version of loony. Automatically upgrading it!")
-        upgrade_loony()
-        sys.exit(0)
+        print("It looks like you are not running the latest version of loony. Upgrade with loony --upgrade.")
+        # upgrade_loony()
+        # sys.exit(0)
     if version:
         show_version()
         sys.exit(0)

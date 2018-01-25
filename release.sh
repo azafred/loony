@@ -38,6 +38,8 @@ if [ -z "$NEEDS_TAG" ]; then
     aws s3 cp ./dist/loony_${NEW_TAG}_macos s3://studyblue-binaries/loony_macos_latest
     aws s3 cp ./dist/loony_${NEW_TAG}_linux s3://studyblue-binaries/archives/
     aws s3 cp ./dist/loony_${NEW_TAG}_linux s3://studyblue-binaries/loony_linux_latest
+    python setup.py sdist
+    twine upload ./dist/loony-${NEW_TAG}.tar.gz
     #git add dist/loony_${NEW_TAG}_macos
     #git commit -am "Adding new binary: loony_${NEW_TAG}_macos"
     git push --tags
