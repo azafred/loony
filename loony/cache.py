@@ -78,5 +78,9 @@ def expire_cache(cache_file=cache_file):
         os.remove(cache_file)
         eprint("Cache removed.")
     except Exception as e:
-        eprint("Debug: Removing cache file: {}".format(str(e)))
-        pass
+        try:
+            cache_file = cache_file + ".db"
+            os.remove(cache_file)
+        except Exception as f:
+            eprint("Debug: Removing cache file: {}".format(str(e) + str(f)))
+            pass
