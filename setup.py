@@ -5,7 +5,7 @@ import subprocess
 from setuptools import setup, find_packages
 from codecs import open
 from loony import version as loonyver
-import versioneer
+#import versioneer
 import sys
 
 print(loonyver.__version__)
@@ -37,7 +37,8 @@ setup(
     url='http://loony.studyblue.com',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
-    install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'decorating', 'animation', 'wget', 'tqdm'],
+    install_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'decorating', 'animation', 'wget', 'tqdm', 'requests'],
+    setup_requires=['libtmux','boto','colorama','prettytable','decorator','pyyaml', 'quik', 'decorating', 'animation', 'wget', 'tqdm', 'requests'],
     tests_require=['nose', 'testfixtures', 'mock'],
     test_suite="nose.collector",
     entry_points={
