@@ -66,12 +66,13 @@ def check_current():
 def upgrade_loony():
     print("Upgrading Loony. Please wait...")
     cur_file = os.path.realpath(__file__)
+    print("Cu")
     cmd = shlex.split('file {}'.format(cur_file))
     filetype = check_output(cmd)
-    if 'Python script' in filetype:
+    if 'site-packages' in cur_file:
         print("\tIt looks like you are using the python source. Upgrading via pip.")
         try:
-            cmd = "sudo -H pip install --upgrade git+ssh://git@github.com/StudyBlue/loony.git"
+            cmd = "sudo -H pip install --upgrade loony"
             parsed_cmd = shlex.split(cmd)
             exit_code = check_call(parsed_cmd)
             print(exit_code)
