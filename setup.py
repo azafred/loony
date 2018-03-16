@@ -8,7 +8,7 @@ from codecs import open
 #import versioneer
 import sys
 
-print(loonyver.__version__)
+# print(loonyver.__version__)
 
 with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
