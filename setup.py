@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
+# import os
 import subprocess
 from setuptools import setup, find_packages
 from codecs import open
-from loony import version as loonyver
+# from loony import version as loonyver
 #import versioneer
 import sys
 
@@ -29,7 +29,7 @@ setup(
     name='loony',
     #version=versioneer.get_version(),
     #cmdclass=versioneer.get_cmdclass(),
-    version=loonyver.__version__,
+    version=version_git,
     description='Script to search and connect to EC2 instances.',
     long_description=readme,
     author='Fred Vassard',
@@ -50,7 +50,6 @@ setup(
     classifiers=[
         'Topic :: Utilities',
         'Programming Language :: Python',
-        'Operating System :: MacOS',
         'Programming Language :: Python :: 2.7'
     ],
 )
