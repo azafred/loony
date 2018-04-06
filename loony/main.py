@@ -10,7 +10,6 @@ import shlex
 import requests
 import os
 import wget
-from . import config
 from subprocess import check_call, call, check_output
 from .aws_fetcher import aws_inventory, list_keys
 from .display import display_results_ordered
@@ -21,6 +20,7 @@ from .settings import *
 from ._version import get_versions
 from .version import __version__
 from tqdm import tqdm
+from . import config
 
 if not os.getenv('PYTHONIOENCODING', None): # PyInstaller workaround
     os.environ['PYTHONIOENCODING'] = 'utf_8'
