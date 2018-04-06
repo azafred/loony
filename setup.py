@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # import os
+from __future__ import absolute_import
+from __future__ import print_function
 import subprocess
 from setuptools import setup, find_packages
 from codecs import open
@@ -19,10 +21,10 @@ with open('LICENSE', encoding='utf-8') as f:
 # Fetching version from git tag...
 try:
     version_git = subprocess.check_output(["git", "describe", "--tags"]).rstrip()
-    print("Version from git: {}".format(version_git))
+    print(("Version from git: {}".format(version_git)))
 except:
     version_git = 'x.x.x'
-    print("Version: {}".format(version_git))
+    print(("Version: {}".format(version_git)))
 
 
 setup(

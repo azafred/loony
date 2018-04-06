@@ -1,6 +1,9 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import prettytable
-import config
+from . import config
 from colorama import Fore, Style
+import six
 
 def format_cell(content, max_line_length):
     #accumulated line length
@@ -44,7 +47,7 @@ def display_results_ordered(results, notable='', cell_length=100):
         # tags = str(r['tags'])
         if r.get('status', '') in 'running':
             for x in display_columns:
-                if isinstance(r[x], basestring):
+                if isinstance(r[x], six.string_types):
                     if r[x].lower() in ['red', 'false']:
                         r[x] = Fore.RED + r[x] + Style.RESET_ALL
                     elif r[x].lower() in ['green', 'true']:
@@ -62,7 +65,7 @@ def display_results_ordered(results, notable='', cell_length=100):
                 t.add_row([format_cell(str(r.get(x, "N/A")), cell_length) for x in display_columns])
                 # t.add_row([format_cell(str(r[x]), cell_length) for x in display_columns])
     if notable:
-        print(t.get_string(border=False, padding_width=1, header=False))
+        print((t.get_string(border=False, padding_width=1, header=False)))
     else:
         print(t)
         u = prettytable.PrettyTable(["color", "meaning"], indent=20)

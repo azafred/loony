@@ -1,6 +1,8 @@
 ﻿#!/usr/bin/env python
 
 
+from __future__ import absolute_import
+from __future__ import print_function
 import argparse
 import logging
 import sys, os
@@ -8,16 +10,16 @@ import shlex
 import requests
 import os
 import wget
-import config
+from . import config
 from subprocess import check_call, call, check_output
-from aws_fetcher import aws_inventory, list_keys
-from display import display_results_ordered
-from search import searchfor
-from connect import connect_to
-from cache import expire_cache
-from settings import *
-from _version import get_versions
-from version import __version__
+from .aws_fetcher import aws_inventory, list_keys
+from .display import display_results_ordered
+from .search import searchfor
+from .connect import connect_to
+from .cache import expire_cache
+from .settings import *
+from ._version import get_versions
+from .version import __version__
 from tqdm import tqdm
 
 if not os.getenv('PYTHONIOENCODING', None): # PyInstaller workaround
@@ -58,8 +60,8 @@ def check_current():
         #current
         return True
     else:
-        print("Current version: {}".format(__version__))
-        print("latest version: {}".format(latest))
+        print(("Current version: {}".format(__version__)))
+        print(("latest version: {}".format(latest)))
         return False
 
 
@@ -77,7 +79,7 @@ def upgrade_loony():
             exit_code = check_call(parsed_cmd)
             print(exit_code)
         except Exception as e:
-            print("Problem with pip: {}".format(str(e)))
+            print(("Problem with pip: {}".format(str(e))))
     else:
         print("\tIt looks like you are running the binary version of loony.")
         os_version = os.uname()[0]
@@ -85,12 +87,12 @@ def upgrade_loony():
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_macos_latest"
         else:
             url = "https://s3.amazonaws.com/studyblue-binaries/loony_linux_latest"
-        print("Downloading latest version from {}".format(url))
+        print(("Downloading latest version from {}".format(url)))
         try:
             wget.download(url, out='/usr/local/bin/loony')
             os.chmod('/usr/local/bin/loony', 755)
         except Exception as e:
-            print("Problem with wget: {}".format(str(e)))
+            print(("Problem with wget: {}".format(str(e))))
 
 
 def connect():
@@ -214,10 +216,10 @@ def main(connect=False, running_only=True):
         list_keys()
     elif search:
         if orsearch:
-            print( "Searching for {} or {}").format(search, orsearch)
+            print(( "Searching for {} or {}").format(search, orsearch))
             results = searchfor(search, orsearch, notable=notable)
         else:
-            print( "Searching for %s" )% search
+            print(( "Searching for %s" )% search)
             results = searchfor(search, notable=notable)
         if connect or connectcli or cmd:
             if user:
@@ -231,7 +233,7 @@ def main(connect=False, running_only=True):
 
 def show_version():
     # __version__ = get_versions()['version']
-    print( "Loony version %s ") % __version__
+    print(( "Loony version %s ") % __version__)
 
 
 if __name__ == '__main__':

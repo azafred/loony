@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from subprocess import call, Popen
 from loony.display import display_results_ordered
 from loony.settings import *
@@ -9,6 +10,7 @@ import libtmux
 import shlex
 import random
 import subprocess
+from six.moves import input
 
 FNULL = open(os.devnull, 'w')
 
@@ -75,7 +77,7 @@ def connect_to(instances, user='', cmd='', batch='', one_only='', public=False):
     #     init_tmux(instances, user=user, cmd=cmd)
     #     pass
     else:
-        dest = raw_input("Connect to instance(s) number: (0 to quit, 'a' for all) ")
+        dest = input("Connect to instance(s) number: (0 to quit, 'a' for all) ")
         dest = dest.split()
         # print("dest: %s" % dest)
         if dest[0] == '0':
@@ -156,7 +158,7 @@ def init_tmux(instances, title='loony', cmd='', user='', public=False):
         if cmd == 'logs':
             role = inst['role']
             try:
-                logfile = (item['log'] for item in logmap if item['role'] == role).next()
+                logfile = next((item['log'] for item in logmap if item['role'] == role))
                 logs = " ".join(logfile)
             except:
                 logs = " ".join(systemlogs)

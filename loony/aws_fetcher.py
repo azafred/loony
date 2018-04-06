@@ -1,8 +1,10 @@
-﻿import boto.ec2
+﻿from __future__ import absolute_import
+from __future__ import print_function
+import boto.ec2
 from datetime import datetime, timedelta
 import animation
-from cache import scached
-from settings import *
+from .cache import scached
+from .settings import *
 from operator import itemgetter
 #from decorating import animated
 
@@ -78,5 +80,5 @@ def aws_inventory():
 def list_keys():
     instances = aws_inventory()
     keys = sorted(instances[0].keys())
-    print "The following keys are available:"
-    print ", ".join(keys)
+    print("The following keys are available:")
+    print(", ".join(keys))

@@ -1,8 +1,10 @@
+from __future__ import absolute_import
 import re
-from aws_fetcher import aws_inventory
-from display import display_results_ordered
+from .aws_fetcher import aws_inventory
+from .display import display_results_ordered
 from pprint import pprint
 from operator import itemgetter
+import six
 
 
 
@@ -11,12 +13,12 @@ def recurse_search(search, item, original_item=''):
     if not original_item:
         original_item = search
     if isinstance(item, dict):
-        for k,v in item.iteritems():
+        for k,v in six.iteritems(item):
             recurse_search(search, v, original_item)
     elif isinstance(item, list):
         for i in item:
             recurse_search(search, i, original_item)
-    elif isinstance(item, str) or isinstance(item, unicode):
+    elif isinstance(item, str) or isinstance(item, six.text_type):
             #if search in item:
             if re.search(pattern, item):
                 return True
@@ -41,7 +43,7 @@ def searchfor(items, orsearch='', notable=''):
                 pattern = re.compile(value)
                 key = key.lower()
                 if re.search(pattern, inst[key]):
-                    if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                    if [id for id in results_per_item[item] if id['id'] == inst['id']]:
                         pass
                     else:
                         results_per_item[item].append(inst)
@@ -50,9 +52,9 @@ def searchfor(items, orsearch='', notable=''):
                         except:
                             result_counter[inst['id']] = 1
             else:
-                for k, v in inst.iteritems():
+                for k, v in six.iteritems(inst):
                     if recurse_search(item, v):
-                        if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                        if [id for id in results_per_item[item] if id['id'] == inst['id']]:
                             pass
                         else:
                             results_per_item[item].append(inst)
@@ -67,7 +69,7 @@ def searchfor(items, orsearch='', notable=''):
                 pattern = re.compile(value)
                 key = key.lower()
                 if re.search(pattern, inst[key]):
-                    if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                    if [id for id in results_per_item[item] if id['id'] == inst['id']]:
                         pass
                     else:
                         results_per_item[item].append(inst)
@@ -76,9 +78,9 @@ def searchfor(items, orsearch='', notable=''):
                         except:
                             orresult_counter[inst['id']] = 1
             else:
-                for k, v in inst.iteritems():
+                for k, v in six.iteritems(inst):
                     if recurse_search(item, v):
-                        if filter(lambda id: id['id'] == inst['id'], results_per_item[item]):
+                        if [id for id in results_per_item[item] if id['id'] == inst['id']]:
                             pass
                         else:
                             results_per_item[item].append(inst)
@@ -87,13 +89,13 @@ def searchfor(items, orsearch='', notable=''):
                             except:
                                 orresult_counter[inst['id']] = 1
 
-    for k, v in result_counter.iteritems():
+    for k, v in six.iteritems(result_counter):
         if v == len(items):
             for inst in aws:
                 if inst['id'] == k and 'running' in inst['status']:
                     result.append(inst)
 
-    for k, v in orresult_counter.iteritems():
+    for k, v in six.iteritems(orresult_counter):
         if v == len(orsearch):
             for inst in aws:
                 if inst['id'] == k and 'running' in inst['status']:
