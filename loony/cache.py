@@ -69,7 +69,7 @@ def scached(cache_file, expiry):
         except Exception as e:
             eprint("Debug: Problem with cache: {}".format(str(e)))
             expire_cache(cache_file=cache_file)
-            pass
+            scached_closure(func, *args, **kw)
     return decorator.decorator(scached_closure)
 
 
