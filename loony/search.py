@@ -25,6 +25,9 @@ def recurse_search(search, item, original_item=''):
 
 def searchfor(items, orsearch='', notable=''):
     aws = aws_inventory()
+    if type(aws) is not list:
+        print("Problem with retrieving instances... Trying again.")
+        aws = aws_inventory()
     results_per_item = {}
     result_counter = {}
     orresult_counter = {}

@@ -25,6 +25,7 @@ def scached(cache_file, expiry):
             d = shelve.open(cache_file)
             changes = False
         except:
+            print("Cache appears to be corrupted. Re-genrating.")
             expire_cache(cache_file=cache_file)
             changes = True
             d = shelve.open(cache_file)
@@ -61,6 +62,7 @@ def scached(cache_file, expiry):
                 }
 
             result = d[key].get('data', '')
+            print("Number of items in cache: {}".format(len(result)))
             if not result:
                 result = scached(cache_file, expiry)
             d.close()
@@ -68,7 +70,7 @@ def scached(cache_file, expiry):
         except Exception as e:
             eprint("Debug: Problem with cache: {}".format(str(e)))
             expire_cache(cache_file=cache_file)
-            pass
+            scached_closure(func, *args, **kw)
     return decorator.decorator(scached_closure)
 
 
